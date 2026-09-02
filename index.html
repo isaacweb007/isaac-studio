@@ -406,7 +406,7 @@
       </svg>
       <div class="circle" aria-hidden="true"></div>
       <div class="heroimg" id="heroImg">
-        <video id="heroV" muted loop autoplay playsinline poster="reels/f03.jpg"><source src="reels/f03.mp4" type="video/mp4"></video>
+        <video id="heroV" muted loop autoplay playsinline poster="reels/f03.jpg"><source src="previews/f03.mp4" type="video/mp4"></video>
       </div>
       <div class="nowplay"><span class="dot" aria-hidden="true"></span><span id="nowName">메이비원</span><small id="nowSpec">30초 · CF</small></div>
     </div>
@@ -1816,6 +1816,17 @@
   function heroPlay(){ if(!hv) return; var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
 
   function srcOf(v){ return v.getAttribute('data-src') || v.getAttribute('src') || ''; }
+  // 히어로 전용 경량본 — 원본은 카드를 눌렀을 때만 받는다
+  function previewOf(s){ return s ? 'previews/' + s.split('/').pop() : ''; }
+  var heroFallback = '';
+  if(hv){
+    hv.addEventListener('error', function(){
+      if(heroFallback && (hv.currentSrc || hv.src || '').indexOf('previews/') > -1){
+        var f = heroFallback; heroFallback = '';
+        hv.src = f; hv.load(); heroPlay();
+      }
+    });
+  }
   var pool = [].slice.call(document.querySelectorAll('.work .media video')).filter(srcOf);
   var bag = [], lastSrc = '';
   function nextWork(){
@@ -1848,7 +1859,8 @@
         var sm = card && card.querySelector('.price small');
         function apply(){
           if(poster) hv.poster = poster;
-          hv.src = src; hv.load(); heroPlay();
+          heroFallback = src;
+          hv.src = previewOf(src); hv.load(); heroPlay();
           if(h4) hn.textContent = h4.textContent.trim();
           if(sm) hk.textContent = sm.textContent.trim();
           lastSrc = src;
