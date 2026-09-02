@@ -551,6 +551,19 @@
           <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f5s">30초 · 7일</small></div>
         </div>
       </article>
+      <article class="work wide" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="아이작 전기스쿠터">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img data-thumb="reels/f06.jpg" alt="" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f06.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.tech">테크</div>
+          <h4 data-i18n="work.f6t">아이작 전기스쿠터</h4>
+          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f5s">30초 · 7일</small></div>
+        </div>
+      </article>
       <article class="work" data-cat="fnb">
         <div class="media" tabindex="0" role="button" aria-label="한밤식탁">
           <video muted loop playsinline preload="none" poster="reels/01.jpg" data-src="reels/01.mp4"></video>
@@ -1099,6 +1112,7 @@
       'work.f3s':'30 sec · 7 days',
       'work.f4s':'53 sec · 12 days',
       'work.f5s':'30 sec · 7 days',
+      'work.f6t':'Isaac E-Scooter',
       'cat.tech':'Tech',
       'cat.life':'Lifestyle',
       'cat.jewel':'Jewellery',
@@ -1213,6 +1227,7 @@
       'work.f3s':'30 giây · 7 ngày',
       'work.f4s':'53 giây · 12 ngày',
       'work.f5s':'30 giây · 7 ngày',
+      'work.f6t':'Xe máy điện Isaac',
       'cat.tech':'Công nghệ',
       'cat.life':'Phong cách sống',
       'cat.jewel':'Trang sức',
@@ -1327,6 +1342,7 @@
       'work.f3s':'30秒・7日',
       'work.f4s':'53秒・12日',
       'work.f5s':'30秒・7日',
+      'work.f6t':'アイザック 電動スクーター',
       'cat.tech':'テック',
       'cat.life':'ライフスタイル',
       'cat.jewel':'ジュエリー',
@@ -1441,6 +1457,7 @@
       'work.f3s':'30秒 · 7天',
       'work.f4s':'53秒 · 12天',
       'work.f5s':'30秒 · 7天',
+      'work.f6t':'Isaac 电动踏板车',
       'cat.tech':'科技',
       'cat.life':'生活方式',
       'cat.jewel':'珠宝',
@@ -1555,6 +1572,7 @@
       'work.f3s':'30 detik · 7 hari',
       'work.f4s':'53 detik · 12 hari',
       'work.f5s':'30 detik · 7 hari',
+      'work.f6t':'Skuter Listrik Isaac',
       'cat.tech':'Teknologi',
       'cat.life':'Gaya hidup',
       'cat.jewel':'Perhiasan',
@@ -1669,6 +1687,7 @@
       'work.f3s':'30 saat · 7 hari',
       'work.f4s':'53 saat · 12 hari',
       'work.f5s':'30 saat · 7 hari',
+      'work.f6t':'Skuter Elektrik Isaac',
       'cat.tech':'Teknologi',
       'cat.life':'Gaya hidup',
       'cat.jewel':'Barang kemas',
@@ -1789,35 +1808,56 @@
     }, {passive:true});
   })();
 
-  // 히어로 원 — 작품 순환 + 자동재생 폴백
-  var HERO = [
-    {s:'reels/f03.mp4', n:'메이비원', k:'30초 · CF'},
-    {s:'reels/f02.mp4', n:'TON TV',  k:'60초 · 브랜드 필름'},
-    {s:'reels/f04.mp4', n:'BÀNCHAN', k:'53초 · 티저'},
-    {s:'reels/03.mp4',  n:'산목',    k:'30초 · CF'},
-    {s:'reels/f05.mp4', n:'패밀리월렛', k:'30초 · CF'}
-  ];
+  // 히어로 원 — 포트폴리오 전체에서 무작위로 계속 바뀐다
   var hv = document.getElementById('heroV'),
       hw = document.getElementById('heroImg'),
       hn = document.getElementById('nowName'),
-      hk = document.getElementById('nowSpec'), hi = 0;
+      hk = document.getElementById('nowSpec');
   function heroPlay(){ if(!hv) return; var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
+
+  function srcOf(v){ return v.getAttribute('data-src') || v.getAttribute('src') || ''; }
+  var pool = [].slice.call(document.querySelectorAll('.work .media video')).filter(srcOf);
+  var bag = [], lastSrc = '';
+  function nextWork(){
+    if(!bag.length){
+      bag = pool.slice();
+      for(var i = bag.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1)), t = bag[i]; bag[i] = bag[j]; bag[j] = t;
+      }
+      // 한 바퀴 경계에서 같은 편이 두 번 연달아 나오지 않게
+      if(bag.length > 1 && srcOf(bag[0]) === lastSrc) bag.push(bag.shift());
+    }
+    return bag.shift();
+  }
+
   if(hv){
     heroPlay();
     ['pointerdown','keydown','scroll'].forEach(function(ev){
       window.addEventListener(ev, heroPlay, {once:true, passive:true});
     });
-    if(!reduce){
+    if(pool.length){
       setInterval(function(){
         if(document.hidden) return;
-        hi = (hi + 1) % HERO.length;
-        var it = HERO[hi];
-        hw.classList.add('swap');
-        setTimeout(function(){
-          hv.src = it.s; hv.load(); heroPlay();
-          hn.textContent = it.n; hk.textContent = it.k;
+        var v = nextWork(); if(!v) return;
+        var card = v.closest('.work'), src = srcOf(v);
+        var im = card && card.querySelector('.media img');
+        var poster = v.getAttribute('poster')
+          || (im && (im.getAttribute('data-thumb') || im.getAttribute('src'))) || '';
+        // 라벨은 그때그때 카드에서 읽는다 — 언어를 바꿔도 따라온다
+        var h4 = card && card.querySelector('h4');
+        var sm = card && card.querySelector('.price small');
+        function apply(){
+          if(poster) hv.poster = poster;
+          hv.src = src; hv.load(); heroPlay();
+          if(h4) hn.textContent = h4.textContent.trim();
+          if(sm) hk.textContent = sm.textContent.trim();
+          lastSrc = src;
           hw.classList.remove('swap');
-        }, 450);
+        }
+        // 움직임을 줄여 달라는 설정에서는 페이드만 생략하고 교체는 그대로 한다
+        if(reduce){ apply(); return; }
+        hw.classList.add('swap');
+        setTimeout(apply, 450);
       }, 6500);
     }
   }
