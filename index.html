@@ -88,6 +88,33 @@
     border-bottom:1px solid rgba(26,26,26,.12)}
   .mobmenu a:last-child{border-bottom:0}
   .mobmenu[hidden],.mobbd[hidden]{display:none}
+
+  /* ========== 작품 크게 보기 ========== */
+  .lb{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    padding:24px}
+  .lb[hidden]{display:none}
+  .lbbd{position:absolute;inset:0;background:rgba(10,10,10,.94);border:0;cursor:pointer;
+    animation:lbfade .18s ease}
+  @keyframes lbfade{from{opacity:0}to{opacity:1}}
+  .lbin{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:14px;
+    max-width:min(1120px,94vw);animation:lbrise .22s cubic-bezier(.2,.7,.3,1)}
+  @keyframes lbrise{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+  .lbin video{max-width:100%;max-height:76vh;border-radius:14px;background:#000;display:block;
+    box-shadow:0 30px 80px -22px rgba(0,0,0,.75)}
+  .lbmeta{display:flex;align-items:baseline;gap:12px;color:#F5F1EA;text-align:center;flex-wrap:wrap;
+    justify-content:center}
+  .lbmeta b{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .lbmeta small{font-size:13.5px;color:rgba(245,241,234,.6)}
+  .lbx{position:absolute;top:18px;right:18px;z-index:2;width:44px;height:44px;border-radius:999px;
+    border:1.5px solid rgba(245,241,234,.3);background:rgba(24,24,24,.65);cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+  .lbx:hover{background:rgba(40,40,40,.9)}
+  .lbx svg{width:19px;height:19px;stroke:#F5F1EA;fill:none;stroke-width:2;stroke-linecap:round}
+  @media (max-width:640px){
+    .lb{padding:14px}
+    .lbin video{max-height:70vh;border-radius:10px}
+    .lbx{top:10px;right:10px;width:40px;height:40px}
+  }
   @media (max-width:1040px){
     .navlinks{display:none}
     .burger{display:flex}
@@ -212,12 +239,13 @@
   .feat.on span{font-weight:600}
 
   /* ========== 작품 카드 ========== */
-  .works{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .works{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
   .work{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
     overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
   .work:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-  .work .media{position:relative;aspect-ratio:4/5;background:#111;overflow:hidden;cursor:pointer}
-  .work.wide .media{aspect-ratio:16/10}
+  .work .media{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;cursor:pointer}
+  .work.wide .media{aspect-ratio:16/9}
+  .work.wide{grid-column:span 2}
   .work .media video,.work .media img{width:100%;height:100%;object-fit:cover;display:block}
   .badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;
     font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;z-index:2}
@@ -248,7 +276,7 @@
     .filters::-webkit-scrollbar{display:none}
     .fbtn{flex:none;font-size:12.5px;padding:8px 13px}
   }
-  @media (max-width:359px){.works{grid-template-columns:1fr}}
+  @media (max-width:359px){.works{grid-template-columns:1fr}.work.wide{grid-column:span 1}}
 
   /* ========== 포트폴리오 필터 ========== */
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
@@ -381,6 +409,14 @@
   </div>
 </nav>
 <button class="mobbd" id="mobbd" aria-label="메뉴 닫기" tabindex="-1" hidden></button>
+<div class="lb" id="lb" hidden>
+  <button class="lbbd" id="lbbd" aria-label="닫기" tabindex="-1"></button>
+  <div class="lbin" role="dialog" aria-modal="true" aria-labelledby="lbt">
+    <video id="lbv" controls playsinline preload="none"></video>
+    <div class="lbmeta"><b id="lbt"></b><small id="lbs"></small></div>
+  </div>
+  <button class="lbx" id="lbx" aria-label="닫기"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
   <div class="mobmenu" id="mobmenu" hidden>
     <a href="#work" data-i18n="nav.work2">포트폴리오</a>
     <a href="#how" data-i18n="nav.work">하는 일</a>
@@ -496,7 +532,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.app">앱</div>
           <h4>혼자 정하기엔</h4>
-          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f1s">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="price.p2">$3,300</b><small data-i18n="work.f1s">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="app">
@@ -509,7 +545,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.app">앱</div>
           <h4>TON TV</h4>
-          <div class="price"><b data-i18n="price.p3">900만원</b><small data-i18n="work.f2s">60초 · 12일</small></div>
+          <div class="price"><b data-i18n="price.p3">$6,600</b><small data-i18n="work.f2s">60초 · 12일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="app">
@@ -522,7 +558,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.app">앱</div>
           <h4>메이비원 MAYBE ONE</h4>
-          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f3s">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="price.p2">$3,300</b><small data-i18n="work.f3s">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="fnb">
@@ -535,7 +571,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>BÀNCHAN</h4>
-          <div class="price"><b data-i18n="price.p3">900만원</b><small data-i18n="work.f4s">53초 · 12일</small></div>
+          <div class="price"><b data-i18n="price.p3">$6,600</b><small data-i18n="work.f4s">53초 · 12일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="app">
@@ -548,7 +584,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.app">앱</div>
           <h4>패밀리월렛</h4>
-          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f5s">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="price.p2">$3,300</b><small data-i18n="work.f5s">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="tech">
@@ -561,7 +597,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.tech">테크</div>
           <h4 data-i18n="work.f6t">아이작 전기스쿠터</h4>
-          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f5s">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="price.p2">$3,300</b><small data-i18n="work.f5s">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -572,10 +608,10 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4 data-i18n="work.t1">자정에도, 제대로</h4>
-          <div class="price"><b data-i18n="work.p1">150만원</b><small data-i18n="work.s1">18초 · 3일</small></div>
+          <div class="price"><b data-i18n="work.p1">$1,100</b><small data-i18n="work.s1">18초 · 3일</small></div>
         </div>
       </article>
-      <article class="work" data-cat="beauty">
+      <article class="work wide" data-cat="beauty">
         <div class="media" tabindex="0" role="button" aria-label="무결">
           <video muted loop playsinline preload="none" poster="reels/02.jpg" data-src="reels/02.mp4"></video>
           <span class="play" aria-hidden="true"></span>
@@ -583,7 +619,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4 data-i18n="work.t2">오늘은, 그냥</h4>
-          <div class="price"><b data-i18n="work.p2">450만원</b><small data-i18n="work.s2">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="work.p2">$3,300</b><small data-i18n="work.s2">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fashion">
@@ -595,7 +631,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k3">패션</div>
           <h4 data-i18n="work.t3">퇴근하고, 그대로</h4>
-          <div class="price"><b data-i18n="work.p3">450만원</b><small data-i18n="work.s3">30초 · 7일</small></div>
+          <div class="price"><b data-i18n="work.p3">$3,300</b><small data-i18n="work.s3">30초 · 7일</small></div>
         </div>
       </article>
       <article class="work" data-cat="tech">
@@ -607,7 +643,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.tech">테크</div>
           <h4>VORTA</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fashion">
@@ -619,7 +655,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k3">패션</div>
           <h4>Weekend Bag</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -631,7 +667,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Night Heron Tonic</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="life">
@@ -643,7 +679,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.life">라이프스타일</div>
           <h4>Room Tone Candleworks</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -655,7 +691,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>puff.</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -667,7 +703,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Stack</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -679,7 +715,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Bramble Ledger Kitchen</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -691,7 +727,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>LAZARTIGUE</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -703,7 +739,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>Botanical</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -715,7 +751,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>Creator UGC</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="tech">
@@ -727,7 +763,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.tech">테크</div>
           <h4>Headphones</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="life">
@@ -739,7 +775,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.life">라이프스타일</div>
           <h4>Glassware</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="tech">
@@ -751,7 +787,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.tech">테크</div>
           <h4>KAVO</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -763,7 +799,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Velvet Pine Creamery</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -775,7 +811,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>Beauty Device</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fashion">
@@ -787,7 +823,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k3">패션</div>
           <h4>Slim Wallet</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="graphic">
@@ -799,7 +835,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
           <h4>Miniature City</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="jewel">
@@ -811,7 +847,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.jewel">주얼리</div>
           <h4>Locket</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="tech">
@@ -823,7 +859,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.tech">테크</div>
           <h4>Earbuds</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="beauty">
@@ -835,7 +871,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>Hair Care</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -847,7 +883,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Stone Orchard Pantry</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="jewel">
@@ -859,7 +895,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.jewel">주얼리</div>
           <h4>Watch Exploded</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="fnb">
@@ -871,7 +907,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
           <h4>Ame Kaze</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="beauty">
@@ -883,7 +919,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
           <h4>Retro Tube</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="graphic">
@@ -895,7 +931,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
           <h4>Paper Wave</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
       <article class="work" data-cat="graphic">
@@ -907,7 +943,7 @@
         <div class="info">
           <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
           <h4>Halftone Can</h4>
-          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+          <div class="price"><b data-i18n="price.p1">$1,100</b><small data-i18n="short.spec">15초 · 3일</small></div>
         </div>
       </article>
     </div>
@@ -960,25 +996,25 @@
       <div class="plan">
         <div class="pname" data-i18n="price.n1">숏폼 싱글</div>
         <div class="pspec" data-i18n="price.s1">15초 · 9:16 · 1편</div>
-        <div class="pprice" data-i18n="price.p1">150만원</div>
+        <div class="pprice" data-i18n="price.p1">$1,100</div>
         <div class="pdesc" data-i18n="price.d1">납기 3영업일. 릴스·틱톡·쇼츠 단일 소재가 필요할 때.</div>
       </div>
       <div class="plan hot">
         <span class="ptag" data-i18n="price.tag">가장 많이 선택</span>
         <div class="pname" data-i18n="price.n2">CF 스탠다드</div>
         <div class="pspec" data-i18n="price.s2">30초 본편 + 15초 컷다운 2종 · 16:9 / 9:16</div>
-        <div class="pprice" data-i18n="price.p2">450만원</div>
+        <div class="pprice" data-i18n="price.p2">$3,300</div>
         <div class="pdesc" data-i18n="price.d2">납기 7영업일. 기존 프로덕션 견적의 10분의 1로 같은 사양을 받습니다.</div>
       </div>
       <div class="plan">
         <div class="pname" data-i18n="price.n3">CF 프리미엄</div>
         <div class="pspec" data-i18n="price.s3">60초 본편 + 컷다운 4종 + 스틸 6컷</div>
-        <div class="pprice" data-i18n="price.p3">900만원</div>
+        <div class="pprice" data-i18n="price.p3">$6,600</div>
         <div class="pdesc" data-i18n="price.d3">납기 12영업일. 브랜드 캠페인 단위로 소재가 한꺼번에 필요할 때.</div>
       </div>
     </div>
-    <div class="pmore" data-i18n="price.more">앱 소개영상 350만원 · 기업 소개영상 800만~1,500만원 · 콘텐츠 구독 월 280만원(주 1편 납품)</div>
-    <div class="pnote" data-i18n="price.note">전 금액 VAT 별도 · 수정 2회 포함 · 멀티포맷 컷다운 추가 비용 없음 · 긴급 납기 +40%</div>
+    <div class="pmore" data-i18n="price.more">앱 소개영상 $2,600 · 기업 소개영상 $5,900~$11,000 · 콘텐츠 구독 월 $2,100(주 1편 납품)</div>
+    <div class="pnote" data-i18n="price.note">전 금액 USD · 부가세 별도 · 수정 2회 포함 · 멀티포맷 컷다운 추가 비용 없음 · 긴급 납기 +40%</div>
   </div>
 </section>
 
@@ -1061,14 +1097,14 @@
       'price.d3':'12 working days. For when a whole campaign of assets is needed at once.',
       'price.h2':'We publish our prices',
       'price.lead':'In this market quotes are kept private by convention. That structure alone filters out smaller advertisers — you have to ask to find out. We chose to show it first.',
-      'price.more':'App intro film ₩3.5M · Corporate film ₩8M–15M · Content subscription ₩2.8M/month (one film per week)',
+      'price.more':'App intro film $2,600 · Company film $5,900–$11,000 · Content subscription $2,100/month (one film a week)',
       'price.n1':'Shortform Single',
       'price.n2':'CF Standard',
       'price.n3':'CF Premium',
-      'price.note':'All prices exclude VAT · Two revision rounds included · Multi-format cutdowns at no extra cost · Rush delivery +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'All prices in USD, excluding VAT · Two revision rounds included · No extra charge for multi-format cutdowns · Rush delivery +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15 sec · 9:16 · 1 film',
       'price.s2':'30 sec master + two 15 sec cutdowns · 16:9 / 9:16',
       'price.s3':'60 sec master + 4 cutdowns + 6 stills',
@@ -1183,14 +1219,14 @@
       'price.d3':'12 ngày làm việc. Khi cần cả một chiến dịch tư liệu cùng lúc.',
       'price.h2':'Chúng tôi công khai bảng giá',
       'price.lead':'Trong ngành này, báo giá theo thông lệ là kín. Riêng cấu trúc đó đã loại bỏ các nhà quảng cáo nhỏ — phải hỏi mới biết. Chúng tôi chọn cách nói trước.',
-      'price.more':'Phim giới thiệu ứng dụng ₩3.5M · Phim doanh nghiệp ₩8M–15M · Gói thuê bao nội dung ₩2.8M/tháng (một phim mỗi tuần)',
+      'price.more':'Phim giới thiệu ứng dụng $2.600 · Phim doanh nghiệp $5.900–$11.000 · Gói nội dung $2.100/tháng (mỗi tuần một phim)',
       'price.n1':'Shortform đơn lẻ',
       'price.n2':'CF Standard',
       'price.n3':'CF Premium',
-      'price.note':'Giá chưa gồm VAT · Bao gồm hai vòng chỉnh sửa · Bản cắt đa định dạng không tính thêm phí · Giao gấp +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'Toàn bộ tính bằng USD, chưa gồm VAT · Bao gồm 2 lần chỉnh sửa · Không phụ thu cho các bản cắt đa định dạng · Giao gấp +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15 giây · 9:16 · 1 phim',
       'price.s2':'Bản chính 30 giây + hai bản cắt 15 giây · 16:9 / 9:16',
       'price.s3':'Bản chính 60 giây + 4 bản cắt + 6 ảnh tĩnh',
@@ -1305,14 +1341,14 @@
       'price.d3':'納期12営業日。キャンペーン単位で素材が一度に必要なときに。',
       'price.h2':'料金表を公開します',
       'price.lead':'この市場では見積は慣行的に非公開です。問い合わせないと分からない構造そのものが、中小の広告主をふるい落とします。私たちは先に見せる側を選びました。',
-      'price.more':'アプリ紹介映像 ₩3.5M · 企業紹介映像 ₩8M–15M · コンテンツ定額 月₩2.8M（週1本納品）',
+      'price.more':'アプリ紹介映像 $2,600 ・ 企業紹介映像 $5,900〜$11,000 ・ コンテンツ定額 月 $2,100（週1本納品）',
       'price.n1':'ショートフォーム単体',
       'price.n2':'CF スタンダード',
       'price.n3':'CF プレミアム',
-      'price.note':'全額VAT別 · 修正2回込み · マルチフォーマットのカットダウンは追加費用なし · 特急納期 +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'表示はすべてUSD・税別 ・ 修正2回込み ・ マルチフォーマットのカットダウン追加費用なし ・ 特急納品 +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15秒 · 9:16 · 1本',
       'price.s2':'30秒本編 + 15秒カットダウン2種 · 16:9 / 9:16',
       'price.s3':'60秒本編 + カットダウン4種 + スチル6カット',
@@ -1427,14 +1463,14 @@
       'price.d3':'十二个工作日。适合一次性需要整套战役素材时。',
       'price.h2':'我们公开价格',
       'price.lead':'这个行业里，报价按惯例都不公开。仅这一点就把中小广告主挡在门外——不问就不知道。我们选择先说出来。',
-      'price.more':'应用介绍片 ₩3.5M · 企业宣传片 ₩8M–15M · 内容订阅 每月₩2.8M（每周交付一支）',
+      'price.more':'应用介绍片 $2,600 · 企业宣传片 $5,900–$11,000 · 内容订阅 每月 $2,100（每周一支）',
       'price.n1':'短视频单支',
       'price.n2':'CF 标准版',
       'price.n3':'CF 高级版',
-      'price.note':'所有价格不含增值税 · 含两轮修改 · 多版式剪辑不另收费 · 加急交付 +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'全部以美元计价，不含税 · 含两次修改 · 多版本裁切不另收费 · 加急交付 +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15秒 · 9:16 · 1支',
       'price.s2':'30秒主片 + 15秒剪辑版两支 · 16:9 / 9:16',
       'price.s3':'60秒主片 + 四支剪辑版 + 六张静帧',
@@ -1549,14 +1585,14 @@
       'price.d3':'12 hari kerja. Saat satu kampanye penuh dibutuhkan sekaligus.',
       'price.h2':'Kami membuka daftar harga',
       'price.lead':'Di pasar ini penawaran lazimnya dirahasiakan. Struktur itu saja sudah menyaring pengiklan kecil — harus bertanya dulu baru tahu. Kami memilih memberi tahu lebih dulu.',
-      'price.more':'Video profil aplikasi ₩3.5M · Video profil perusahaan ₩8M–15M · Langganan konten ₩2.8M/bulan (satu film per minggu)',
+      'price.more':'Video profil aplikasi $2.600 · Video profil perusahaan $5.900–$11.000 · Langganan konten $2.100/bulan (satu video seminggu)',
       'price.n1':'Shortform Tunggal',
       'price.n2':'CF Standard',
       'price.n3':'CF Premium',
-      'price.note':'Semua harga belum termasuk PPN · Termasuk dua putaran revisi · Potongan multi-format tanpa biaya tambahan · Pengerjaan kilat +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'Semua harga dalam USD, belum termasuk PPN · Termasuk dua kali revisi · Tanpa biaya tambahan untuk potongan multi-format · Pengerjaan kilat +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15 detik · 9:16 · 1 film',
       'price.s2':'Master 30 detik + dua potongan 15 detik · 16:9 / 9:16',
       'price.s3':'Master 60 detik + 4 potongan + 6 still',
@@ -1671,14 +1707,14 @@
       'price.d3':'12 hari bekerja. Apabila satu kempen penuh diperlukan serentak.',
       'price.h2':'Kami mendedahkan senarai harga',
       'price.lead':'Dalam pasaran ini sebut harga lazimnya dirahsiakan. Struktur itu sendiri menapis keluar pengiklan kecil — perlu bertanya barulah tahu. Kami memilih untuk memberitahu dahulu.',
-      'price.more':'Video pengenalan aplikasi ₩3.5M · Video korporat ₩8M–15M · Langganan kandungan ₩2.8M/bulan (satu filem seminggu)',
+      'price.more':'Video pengenalan apl $2,600 · Video korporat $5,900–$11,000 · Langganan kandungan $2,100/bulan (satu video seminggu)',
       'price.n1':'Shortform Tunggal',
       'price.n2':'CF Standard',
       'price.n3':'CF Premium',
-      'price.note':'Semua harga tidak termasuk SST · Termasuk dua pusingan pindaan · Potongan berbilang format tanpa kos tambahan · Penghantaran segera +40%',
-      'price.p1':'₩1.5M',
-      'price.p2':'₩4.5M',
-      'price.p3':'₩9M',
+      'price.note':'Semua harga dalam USD, tidak termasuk cukai · Termasuk dua pusingan semakan · Tiada caj tambahan untuk potongan pelbagai format · Penghantaran segera +40%',
+      'price.p1':'$1,100',
+      'price.p2':'$3,300',
+      'price.p3':'$6,600',
       'price.s1':'15 saat · 9:16 · 1 filem',
       'price.s2':'Master 30 saat + dua potongan 15 saat · 16:9 / 9:16',
       'price.s3':'Master 60 saat + 4 potongan + 6 imej pegun',
@@ -1941,6 +1977,35 @@
     });
   });
 
+  // 작품 크게 보기 — 카드를 누르면 원본을 띄운다
+  var lb = document.getElementById('lb'), lbv = document.getElementById('lbv'),
+      lbt = document.getElementById('lbt'), lbs = document.getElementById('lbs'),
+      lbLast = null;
+  function openLB(card){
+    if(!card || !lb) return;
+    var v = card.querySelector('video'); if(!v) return;
+    var src = v.getAttribute('data-src') || v.getAttribute('src'); if(!src) return;
+    var h4 = card.querySelector('h4'), sm = card.querySelector('.price small');
+    lbt.textContent = h4 ? h4.textContent.trim() : '';
+    lbs.textContent = sm ? sm.textContent.trim() : '';
+    lbLast = card.querySelector('.media');
+    // 카드에서 돌던 프리뷰는 멈춘다
+    Array.prototype.forEach.call(document.querySelectorAll('.work .media video'), function(x){ x.pause(); });
+    lbv.src = src; lb.hidden = false;
+    var p = lbv.play(); if(p && p.catch) p.catch(function(){});
+  }
+  function closeLB(){
+    if(!lb || lb.hidden) return;
+    lbv.pause(); lbv.removeAttribute('src'); lbv.load();
+    lb.hidden = true;
+    if(lbLast){ lbLast.focus(); lbLast = null; }
+  }
+  if(lb){
+    document.getElementById('lbbd').addEventListener('click', closeLB);
+    document.getElementById('lbx').addEventListener('click', closeLB);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLB(); });
+  }
+
   Array.prototype.forEach.call(document.querySelectorAll('.work .media'), function(m){
     var v = m.querySelector('video'); if(!v) return;
     function go(){
@@ -1949,9 +2014,9 @@
     }
     function stop(){ v.pause(); try{ v.currentTime = 0; }catch(e){} }
     if(!reduce && canHover){ m.addEventListener('pointerenter', go); m.addEventListener('pointerleave', stop); }
-    m.addEventListener('click', function(){ v.paused ? go() : stop(); });
+    m.addEventListener('click', function(){ openLB(m.closest('.work')); });
     m.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); v.paused ? go() : stop(); }
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLB(m.closest('.work')); }
     });
   });
 })();
