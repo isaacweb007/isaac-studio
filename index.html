@@ -347,6 +347,14 @@
   .cta h2{color:#1A1A1A;font-size:clamp(26px,3.6vw,42px);line-height:1.18;max-width:18ch}
   .cta p{margin:0;color:rgba(26,26,26,.75);font-size:16.5px;line-height:1.75;max-width:44ch}
   .ctarow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .ctamails{display:flex;gap:14px 30px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  .ctamails span{display:inline-flex;align-items:baseline;gap:9px}
+  .ctamails b{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    color:rgba(26,26,26,.52);white-space:nowrap}
+  .ctamails a{font-size:14.5px;font-weight:600;color:#1A1A1A;
+    border-bottom:2px solid rgba(26,26,26,.28);padding-bottom:1px;transition:border-color .15s}
+  .ctamails a:hover{border-bottom-color:#1A1A1A}
+  @media (max-width:560px){.ctamails{gap:10px 20px}.ctamails span{gap:7px}}
   .mailto{font-size:14px;font-weight:600;color:#1A1A1A;border-bottom:2px solid #1A1A1A;
     padding-bottom:2px}
 
@@ -1050,7 +1058,10 @@
       <p data-i18n="cta.p">제품 사진과 로고, 그리고 팔고 싶은 한 가지만 알려주세요. 15초 시안 한 편을 무료로 만들어 보내드립니다. 보시고 아니다 싶으면 거기서 끝내셔도 됩니다.</p>
       <div class="ctarow">
         <a href="mailto:hello@isaacstudio.cc" class="btn" data-i18n="cta.btn">무료 시안 신청하기</a>
-        <a href="mailto:hello@isaacstudio.cc" class="mailto">hello@isaacstudio.cc</a>
+      </div>
+      <div class="ctamails">
+        <span><b data-i18n="cta.m1">견적 문의</b><a href="mailto:hello@isaacstudio.cc">hello@isaacstudio.cc</a></span>
+        <span><b data-i18n="cta.m2">대표 직통</b><a href="mailto:isaac@isaacstudio.cc">isaac@isaacstudio.cc</a></span>
       </div>
     </div>
   </div>
@@ -1075,6 +1086,8 @@
       'cta.btn':'Request a free cut',
       'cta.h2':'Send the material today. See the cut in three days.',
       'cta.p':'Send us product photos, your logo, and the one thing you want to sell. We will make you a 15-second cut for free. If it is not right, that is where it ends.',
+      'cta.m1':'Quote requests',
+      'cta.m2':'Founder direct',
       'feat.1':'Done in 7 days',
       'feat.2':'AI production workflow',
       'feat.3':'Broadcast-grade quality',
@@ -1197,6 +1210,8 @@
       'cta.btn':'Yêu cầu bản dựng miễn phí',
       'cta.h2':'Gửi tư liệu hôm nay, ba ngày sau xem bản dựng',
       'cta.p':'Gửi cho chúng tôi ảnh sản phẩm, logo, và một điều bạn muốn bán. Chúng tôi làm miễn phí một bản 15 giây. Xem xong thấy không hợp thì dừng ở đó cũng được.',
+      'cta.m1':'Yêu cầu báo giá',
+      'cta.m2':'Trực tiếp tới giám đốc',
       'feat.1':'Hoàn thành trong 7 ngày',
       'feat.2':'Quy trình AI',
       'feat.3':'Chất lượng phát sóng',
@@ -1319,6 +1334,8 @@
       'cta.btn':'無料サンプルを依頼する',
       'cta.h2':'今日素材をいただければ、3日後にサンプルを見られます',
       'cta.p':'商品写真とロゴ、そして売りたいものをひとつだけお知らせください。15秒の企画案を一本、無料でおつくりします。ご覧になって違うと思われたら、そこで終わりで構いません。',
+      'cta.m1':'お見積もり',
+      'cta.m2':'代表直通',
       'feat.1':'7日で完成',
       'feat.2':'AI制作ワークフロー',
       'feat.3':'放送水準の品質',
@@ -1441,6 +1458,8 @@
       'cta.btn':'申请免费样片',
       'cta.h2':'今天把素材给我们，三天后看到样片',
       'cta.p':'把产品照片、logo，还有你最想卖的那一点告诉我们。我们免费做一支15秒的样片。看完觉得不合适，到此为止也没关系。',
+      'cta.m1':'报价咨询',
+      'cta.m2':'负责人直通',
       'feat.1':'7天交付',
       'feat.2':'AI 制作流程',
       'feat.3':'播出级品质',
@@ -1563,6 +1582,8 @@
       'cta.btn':'Minta sampel gratis',
       'cta.h2':'Kirim materinya hari ini, lihat sampelnya tiga hari lagi',
       'cta.p':'Kirimkan foto produk, logo, dan satu hal yang ingin Anda jual. Kami buatkan satu potongan 15 detik secara gratis. Kalau setelah dilihat ternyata kurang cocok, berhenti di situ pun tidak masalah.',
+      'cta.m1':'Permintaan penawaran',
+      'cta.m2':'Langsung ke pendiri',
       'feat.1':'Selesai 7 hari',
       'feat.2':'Alur kerja AI',
       'feat.3':'Kualitas siar',
@@ -1685,6 +1706,8 @@
       'cta.btn':'Mohon sampel percuma',
       'cta.h2':'Hantar bahannya hari ini, lihat sampelnya tiga hari lagi',
       'cta.p':'Hantarkan foto produk, logo, dan satu perkara yang ingin anda jual. Kami hasilkan satu potongan 15 saat secara percuma. Jika setelah menontonnya anda rasa kurang sesuai, berhenti di situ pun tidak mengapa.',
+      'cta.m1':'Permintaan sebut harga',
+      'cta.m2':'Terus kepada pengasas',
       'feat.1':'Siap dalam 7 hari',
       'feat.2':'Aliran kerja AI',
       'feat.3':'Kualiti siaran',
