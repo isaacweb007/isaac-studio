@@ -1,0 +1,24 @@
+# 작업 파일 (마스터·중간 산출물 수백 MB)
+AD/
+AD02/
+AD03/
+AD래퍼런스/
+시안/
+
+# 내부 문서 — 원가·재무 추정 포함, 공개 금지
+사업계획서.html
+
+# 원본 소스 영상 (배포본은 reels/ refs/ 에 압축본)
+*.mov
+ad-01-stopped-thumb.mp4
+TonTV_60s_en_1080p.mp4
+파티야_숏츠_9x16.mp4
+45e0752b921a1c741b576a95a670cc90.jpg
+64b6d7f570bd679ef8b0b1f68ad3fcd3.jpg
+
+# 정본은 index.html
+랜딩페이지.html
+*.bak
+
+.DS_Store
+.claude/

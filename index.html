@@ -1,0 +1,1798 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>아이작 스튜디오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+  :root{
+    --yellow:#FED132;
+    --yellow-lite:#FCE07E;
+    --yellow-deep:#F6B705;
+    --cream:#FDF9F1;
+    --card:#FFFFFF;
+    --ink:#1A1A1A;
+    --ink-2:rgba(26,26,26,.64);
+    --ink-3:rgba(26,26,26,.42);
+    --line:rgba(26,26,26,.12);
+    --red:#F14242;
+    --shadow:0 2px 8px rgba(26,26,26,.05), 0 12px 32px -16px rgba(26,26,26,.18);
+    --shadow-lg:0 4px 14px rgba(26,26,26,.07), 0 24px 60px -28px rgba(26,26,26,.28);
+    --r:20px;
+
+    --display:"Gothic A1","Noto Sans JP","Noto Sans SC","Apple SD Gothic Neo",sans-serif;
+    --body:"IBM Plex Sans","IBM Plex Sans KR","Noto Sans JP","Noto Sans SC","Apple SD Gothic Neo",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --cream:#131211;--card:#1C1A18;--ink:#F5F1EA;
+      --ink-2:rgba(245,241,234,.64);--ink-3:rgba(245,241,234,.42);
+      --line:rgba(245,241,234,.14);
+      --shadow:0 2px 8px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.7);
+      --shadow-lg:0 4px 14px rgba(0,0,0,.45), 0 24px 60px -28px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#131211;--card:#1C1A18;--ink:#F5F1EA;
+    --ink-2:rgba(245,241,234,.64);--ink-3:rgba(245,241,234,.42);
+    --line:rgba(245,241,234,.14);
+    --shadow:0 2px 8px rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.7);
+    --shadow-lg:0 4px 14px rgba(0,0,0,.45), 0 24px 60px -28px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--cream);color:var(--ink);font-family:var(--body);font-weight:400;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    word-break:keep-all;overflow-wrap:break-word}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+  h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-.03em;text-wrap:balance}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* ========== NAV ========== */
+  nav{position:sticky;top:0;z-index:60;background:var(--yellow)}
+  .navin{max-width:1280px;margin:0 auto;padding:0 32px;height:74px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:-.01em;
+    color:#1A1A1A;white-space:nowrap}
+  .navlinks{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:#1A1A1A}
+  .navlinks a{position:relative;padding:6px 0}
+  .navlinks a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:2px;
+    background:#1A1A1A;transition:left .22s,right .22s}
+  .navlinks a:hover::after{left:0;right:0}
+  .navright{display:flex;align-items:center;gap:10px}
+  .icobtn{width:38px;height:38px;border-radius:999px;border:1.5px solid rgba(26,26,26,.28);
+    display:flex;align-items:center;justify-content:center;background:transparent;cursor:pointer}
+  .icobtn svg{width:17px;height:17px;stroke:#1A1A1A;fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  select.lang{font-family:var(--body);font-size:13px;font-weight:500;color:#1A1A1A;
+    background:transparent;border:1.5px solid rgba(26,26,26,.28);border-radius:999px;
+    padding:9px 12px;cursor:pointer}
+  select.lang option{color:#1A1A1A;background:#fff}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--body);font-size:14.5px;font-weight:600;padding:13px 24px;
+    border-radius:999px;border:2px solid #1A1A1A;background:#1A1A1A;color:#FFF;
+    cursor:pointer;white-space:nowrap;transition:transform .15s,background .15s,color .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:#1A1A1A}
+  .btn.ghost:hover{background:#1A1A1A;color:#FFF}
+  .btn.sm{padding:10px 18px;font-size:13.5px}
+  .burger{display:none;width:42px;height:42px;border-radius:999px;
+    border:1.5px solid rgba(26,26,26,.28);background:transparent;cursor:pointer;
+    align-items:center;justify-content:center;flex:none}
+  .burger svg{width:20px;height:20px;stroke:#1A1A1A;fill:none;stroke-width:2;stroke-linecap:round}
+  .mobmenu{background:var(--yellow);border-top:1.5px solid rgba(26,26,26,.16);
+    padding:6px 24px 18px;display:flex;flex-direction:column}
+  .mobmenu a{padding:14px 4px;font-size:16px;font-weight:600;color:#1A1A1A;
+    border-bottom:1px solid rgba(26,26,26,.12)}
+  .mobmenu a:last-child{border-bottom:0}
+  @media (max-width:1040px){
+    .navlinks{display:none}
+    .burger{display:flex}
+    .icobtn{display:none}
+  }
+  @media (min-width:1041px){.mobmenu{display:none!important}}
+
+  /* ========== HERO ========== */
+  .hero{position:relative;background:linear-gradient(160deg,var(--yellow) 0%,var(--yellow) 42%,var(--yellow-lite) 100%);
+    padding:56px 0 128px;overflow:hidden}
+  .heroin{max-width:1280px;margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .hero h1{color:#1A1A1A;font-size:clamp(46px,7vw,92px);line-height:1.02;margin-bottom:26px}
+  .hero h1 span{display:block}
+  .herosub{color:rgba(26,26,26,.78);font-size:17px;line-height:1.75;max-width:30ch;margin-bottom:34px}
+  .herobtns{display:flex;gap:12px;flex-wrap:wrap}
+  .circlewrap{position:relative;display:flex;align-items:center;justify-content:center;
+    min-height:480px}
+  .ring{position:absolute;width:min(520px,104%);aspect-ratio:1;pointer-events:none;
+    animation:spin 46s linear infinite}
+  .ring text{font-family:var(--body);font-size:8px;font-weight:600;letter-spacing:.26em;
+    fill:rgba(26,26,26,.40)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .circle{position:absolute;width:min(430px,86%);aspect-ratio:1;border-radius:999px;
+    background:var(--yellow-deep);transform:translate(15px,16px)}
+  .circle::after{content:"";position:absolute;inset:-18px;border-radius:999px;
+    border:1.5px solid rgba(26,26,26,.16)}
+  .heroimg{position:relative;width:min(430px,86%);aspect-ratio:1;border-radius:999px;
+    overflow:hidden;background:var(--yellow-deep);
+    box-shadow:0 26px 64px -26px rgba(26,26,26,.5)}
+  .heroimg video,.heroimg img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:opacity .45s}
+  .heroimg.swap video{opacity:0}
+  .nowplay{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);
+    background:var(--card);border-radius:999px;box-shadow:var(--shadow-lg);
+    padding:9px 17px;display:flex;align-items:center;gap:9px;white-space:nowrap;
+    font-size:13px;font-weight:600;max-width:88%}
+  .nowplay .dot{width:8px;height:8px;border-radius:999px;background:var(--red);flex:none;
+    animation:blip 1.9s ease-in-out infinite}
+  .nowplay small{color:var(--ink-3);font-weight:500}
+  @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.ring{animation:none}.nowplay .dot{animation:none}}
+  @media (max-width:940px){
+    .hero{padding:30px 0 104px}
+    .heroin{grid-template-columns:1fr;gap:26px}
+    .hero h1{font-size:clamp(40px,11.5vw,64px);margin-bottom:20px}
+    .herosub{font-size:15.5px;max-width:38ch;margin-bottom:26px}
+    .herobtns .btn{flex:1;min-width:0}
+    .circlewrap{min-height:340px}
+    .ring{width:min(360px,94%)}
+    .ring text{font-size:7.4px;letter-spacing:.22em}
+    .circle,.heroimg{width:min(288px,74%)}
+    .circle{transform:translate(10px,11px)}
+    .nowplay{font-size:12px;padding:8px 14px;bottom:2%}
+  }
+
+  /* ========== PROOF PILL ========== */
+  .proofwrap{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:5}
+  .proof{margin-top:-72px;background:var(--card);border-radius:999px;box-shadow:var(--shadow-lg);
+    display:inline-flex;align-items:center;gap:18px;padding:14px 26px 14px 16px;
+    max-width:100%;transition:transform .18s}
+  .proof:hover{transform:translateY(-2px)}
+  .avatars{display:flex;flex:none}
+  .avatars span{width:42px;height:42px;border-radius:999px;border:3px solid var(--card);
+    margin-right:-12px;background:var(--yellow-deep);overflow:hidden;display:block}
+  .avatars span:last-child{margin-right:0}
+  .avatars img{width:100%;height:100%;object-fit:cover;display:block}
+  .prooftxt b{display:block;font-family:var(--display);font-weight:700;font-size:15.5px;
+    letter-spacing:-.01em;line-height:1.35}
+  .prooftxt small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+  .proofarrow{width:34px;height:34px;border-radius:999px;background:var(--yellow);flex:none;
+    display:flex;align-items:center;justify-content:center;margin-left:6px}
+  .proofarrow svg{width:15px;height:15px;stroke:#1A1A1A;fill:none;stroke-width:2.4;
+    stroke-linecap:round;stroke-linejoin:round}
+  @media (max-width:640px){
+    .proof{border-radius:22px;padding:14px 18px;gap:12px}
+    .avatars span{width:34px;height:34px}
+  }
+
+  /* ========== SECTION SHELL ========== */
+  section.band{padding:64px 0}
+  .shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    margin-bottom:26px;flex-wrap:wrap}
+  .shead h2{font-size:clamp(24px,3vw,34px);line-height:1.2}
+  .shead p{margin:8px 0 0;color:var(--ink-2);font-size:15.5px;max-width:52ch}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--yellow);
+    color:#1A1A1A;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;
+    margin-bottom:12px}
+
+  /* ========== 업종 칩 ========== */
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .cat{display:flex;align-items:center;gap:0;background:var(--card);border-radius:var(--r);
+    box-shadow:var(--shadow);overflow:hidden;transition:transform .18s,box-shadow .18s}
+  .cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .cat .thumb{width:104px;height:104px;flex:none;background:var(--yellow-deep);overflow:hidden}
+  .cat .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .cat .lab{flex:1;display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.01em}
+  .cat .lab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round;flex:none;opacity:.55}
+  @media (max-width:940px){.cats{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.cats{grid-template-columns:1fr}}
+
+  /* ========== 강점 행 ========== */
+  .feats{display:flex;align-items:stretch;gap:0;background:var(--card);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:18px 10px;overflow-x:auto}
+  .feat{flex:1;min-width:150px;display:flex;flex-direction:column;align-items:center;gap:9px;
+    padding:8px 12px;border-right:1px solid var(--line);text-align:center}
+  .feat:last-child{border-right:0}
+  .feat.on{background:var(--yellow);border-radius:14px;border-right:0;margin:-4px 4px;padding:12px}
+  .feat svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round}
+  .feat span{font-size:13px;font-weight:500;line-height:1.4}
+  .feat.on span{font-weight:600}
+
+  /* ========== 작품 카드 ========== */
+  .works{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .work{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
+    overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+  .work:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .work .media{position:relative;aspect-ratio:4/5;background:#111;overflow:hidden;cursor:pointer}
+  .work.wide .media{aspect-ratio:16/10}
+  .work .media video,.work .media img{width:100%;height:100%;object-fit:cover;display:block}
+  .badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;
+    font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;z-index:2}
+  .badge.client{background:#1A1A1A}
+  .play{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:999px;
+    background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;
+    transition:transform .18s;z-index:2}
+  .play::after{content:"";width:0;height:0;margin-left:3px;border-left:11px solid #1A1A1A;
+    border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .work:hover .play{transform:scale(1.1)}
+  .work .info{padding:16px 18px 18px}
+  .work .cat-tag{font-size:11.5px;font-weight:600;color:var(--ink-3);margin-bottom:6px}
+  .work h4{font-size:16.5px;font-weight:700;line-height:1.35;margin-bottom:12px}
+  .work .price{display:flex;align-items:baseline;gap:10px}
+  .work .price b{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:-.02em}
+  .work .price small{color:var(--ink-3);font-size:13px}
+  @media (max-width:1040px){.works{grid-template-columns:repeat(2,1fr);gap:14px}}
+  @media (max-width:560px){
+    .works{gap:12px}
+    .work .info{padding:12px 13px 14px}
+    .work h4{font-size:14.5px;margin-bottom:8px}
+    .work .price b{font-size:17px}
+    .work .price small{font-size:11.5px}
+    .work .cat-tag{font-size:10.5px}
+    .filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;
+      margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px;
+      scrollbar-width:none}
+    .filters::-webkit-scrollbar{display:none}
+    .fbtn{flex:none;font-size:12.5px;padding:8px 13px}
+  }
+  @media (max-width:359px){.works{grid-template-columns:1fr}}
+
+  /* ========== 포트폴리오 필터 ========== */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .fbtn{font-family:var(--body);font-size:13.5px;font-weight:600;padding:9px 16px;
+    border-radius:999px;border:1.5px solid var(--line);background:var(--card);
+    color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .fbtn:hover{border-color:var(--ink)}
+  .fbtn.on{background:#1A1A1A;color:#fff;border-color:#1A1A1A}
+  .fbtn .n{opacity:.55;margin-left:5px;font-weight:500}
+  .fbtn.on .n{opacity:.7}
+  .work.hide{display:none}
+  .worksmore{display:flex;justify-content:center;margin-top:26px}
+
+  /* ========== 본문 블록 ========== */
+  .panel{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:34px}
+  .cols2{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
+  .cols2 p{margin:0 0 15px;color:var(--ink-2);max-width:52ch}
+  .cols2 p:last-child{margin-bottom:0}
+  .pullbox{background:var(--yellow);border-radius:var(--r);padding:28px;
+    font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,25px);
+    line-height:1.4;letter-spacing:-.02em;color:#1A1A1A}
+  @media (max-width:900px){.cols2{grid-template-columns:1fr}}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .step{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:24px}
+  .step .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+    border-radius:999px;background:var(--yellow);font-family:var(--display);font-weight:900;
+    font-size:15px;margin-bottom:12px}
+  .step.ai .num{background:#1A1A1A;color:var(--yellow)}
+  .step h4{font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.35}
+  .step p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.7}
+  @media (max-width:900px){.steps{grid-template-columns:1fr}}
+
+  .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .fstep{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:16px 13px;
+    display:flex;flex-direction:column;gap:7px;min-height:170px}
+  .fstep.gate{background:var(--yellow);box-shadow:none}
+  .fstep .d{font-size:11.5px;font-weight:600;color:var(--ink-3)}
+  .fstep.gate .d{color:rgba(26,26,26,.55)}
+  .fstep .t{font-family:var(--display);font-weight:700;font-size:14.5px;line-height:1.3}
+  .fstep .x{font-size:12px;color:var(--ink-2);line-height:1.6}
+  .fstep.gate .x{color:rgba(26,26,26,.7)}
+  .gchip{margin-top:auto;font-size:10px;font-weight:700;background:#1A1A1A;color:var(--yellow);
+    padding:3px 8px;border-radius:999px;align-self:flex-start}
+  @media (max-width:1040px){.flow{grid-template-columns:repeat(2,1fr)}.fstep{min-height:auto}}
+  @media (max-width:520px){.flow{grid-template-columns:1fr}}
+
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .plan{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:28px;
+    display:flex;flex-direction:column;gap:12px}
+  .plan.hot{background:#1A1A1A;color:#fff}
+  .plan.hot .pspec,.plan.hot .pdesc{color:rgba(255,255,255,.62)}
+  .plan.hot .pprice{color:var(--yellow)}
+  .ptag{align-self:flex-start;background:var(--yellow);color:#1A1A1A;font-size:11.5px;
+    font-weight:600;padding:5px 12px;border-radius:999px}
+  .pname{font-family:var(--display);font-weight:700;font-size:19px}
+  .pspec{font-size:13px;color:var(--ink-3);line-height:1.6}
+  .pprice{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.02em;margin-top:4px}
+  .pdesc{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin-top:auto;padding-top:8px}
+  .pmore{margin-top:16px;background:var(--yellow);border-radius:var(--r);padding:18px 24px;
+    font-size:14px;color:#1A1A1A;font-weight:500}
+  .pnote{margin-top:12px;font-size:12.5px;color:var(--ink-3);line-height:1.9}
+  @media (max-width:900px){.plans{grid-template-columns:1fr}}
+
+  /* ========== CTA ========== */
+  .cta{background:var(--yellow);border-radius:32px;padding:56px 40px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:18px}
+  .cta h2{color:#1A1A1A;font-size:clamp(26px,3.6vw,42px);line-height:1.18;max-width:18ch}
+  .cta p{margin:0;color:rgba(26,26,26,.75);font-size:16.5px;line-height:1.75;max-width:44ch}
+  .ctarow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .mailto{font-size:14px;font-weight:600;color:#1A1A1A;border-bottom:2px solid #1A1A1A;
+    padding-bottom:2px}
+
+  @media (max-width:640px){
+    .wrap{padding:0 20px}
+    .navin{padding:0 20px;height:64px}
+    .heroin{padding:0 20px}
+    .proofwrap{padding:0 20px}
+    .ctain{padding:0 20px}
+    .footin{padding:0 20px}
+    section.band{padding:44px 0}
+    .shead{margin-bottom:20px}
+    .shead h2{font-size:clamp(21px,6vw,27px)}
+    .shead p{font-size:14.5px}
+    .panel{padding:22px}
+    .cta{padding:38px 22px;border-radius:24px}
+    .cta h2{font-size:clamp(23px,6.6vw,31px)}
+    .cta p{font-size:15px}
+    .pprice{font-size:29px}
+    .plan{padding:22px}
+    .proof{margin-top:-58px}
+    .brand{font-size:18px}
+  }
+  footer{padding:40px 0 56px;color:var(--ink-3);font-size:13px}
+  .footin{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;
+    justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .disc{margin-top:14px;font-size:12.5px;color:var(--ink-3);line-height:1.8;max-width:70ch}
+</style>
+
+<nav>
+  <div class="navin">
+    <a href="#top" class="brand">ISAAC STUDIO</a>
+    <div class="navlinks">
+      <a href="#work" data-i18n="nav.work2">포트폴리오</a>
+      <a href="#how" data-i18n="nav.work">하는 일</a>
+      <a href="#process" data-i18n="nav.process">프로세스</a>
+      <a href="#pricing" data-i18n="nav.pricing">가격 안내</a>
+      <a href="#vision" data-i18n="nav.vision">비전</a>
+    </div>
+    <div class="navright">
+      <button class="icobtn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <select class="lang" id="lang" aria-label="Language">
+        <option value="ko">KO</option><option value="en">EN</option><option value="vi">VI</option>
+        <option value="ja">JA</option><option value="zh">ZH</option><option value="id">ID</option>
+        <option value="ms">MS</option>
+      </select>
+      <a href="#contact" class="btn sm" data-i18n="nav.cta">견적 문의</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobmenu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobmenu" id="mobmenu" hidden>
+    <a href="#work" data-i18n="nav.work2">포트폴리오</a>
+    <a href="#how" data-i18n="nav.work">하는 일</a>
+    <a href="#process" data-i18n="nav.process">프로세스</a>
+    <a href="#pricing" data-i18n="nav.pricing">가격 안내</a>
+    <a href="#vision" data-i18n="nav.vision">비전</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="heroin">
+    <div>
+      <h1><span data-i18n="hero.h1a">광고 한 편,</span><span data-i18n="hero.h1b">7일</span></h1>
+      <p class="herosub" data-i18n="hero.sub">기획과 연출은 사람이, 촬영은 AI가 합니다. 원가의 대부분을 차지하던 촬영 공정을 대체해 방송 수준의 광고를 기존의 10분의 1 비용으로 만듭니다.</p>
+      <div class="herobtns">
+        <a href="#contact" class="btn" data-i18n="hero.cta1">지금 견적 받기</a>
+        <a href="#work" class="btn ghost" data-i18n="hero.cta2">포트폴리오 보기</a>
+      </div>
+    </div>
+    <div class="circlewrap">
+      <svg class="ring" viewBox="0 0 220 220" aria-hidden="true">
+        <defs><path id="rp" d="M110,110 m-95,0 a95,95 0 1,1 190,0 a95,95 0 1,1 -190,0" fill="none"/></defs>
+        <text><textPath href="#rp" xlink:href="#rp">ISAAC STUDIO · AI COMMERCIAL FILM · 7 DAYS · ISAAC STUDIO · AI COMMERCIAL FILM · 7 DAYS · </textPath></text>
+      </svg>
+      <div class="circle" aria-hidden="true"></div>
+      <div class="heroimg" id="heroImg">
+        <video id="heroV" muted loop autoplay playsinline poster="reels/f03.jpg"><source src="reels/f03.mp4" type="video/mp4"></video>
+      </div>
+      <div class="nowplay"><span class="dot" aria-hidden="true"></span><span id="nowName">메이비원</span><small id="nowSpec">30초 · CF</small></div>
+    </div>
+  </div>
+</header>
+
+<div class="proofwrap">
+  <a class="proof" href="#work">
+    <span class="avatars">
+      <span><img src="reels/01.jpg" alt="" loading="lazy" decoding="async"></span>
+      <span><img src="reels/02.jpg" alt="" loading="lazy" decoding="async"></span>
+      <span><img src="reels/03.jpg" alt="" loading="lazy" decoding="async"></span>
+    </span>
+    <span class="prooftxt">
+      <b data-i18n="proof.a">실제 납품작 · 파티야 앱 광고</b>
+      <small data-i18n="proof.b">본편 16:9 + 9:16 컷다운 · 기획부터 후반까지 전 공정</small>
+    </span>
+    <span class="proofarrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <div class="cats">
+      <a class="cat" href="#work"><span class="thumb"><img src="reels/01.jpg" alt="" loading="lazy" decoding="async"></span><span class="lab"><span data-i18n="reel.k1">F&amp;B</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="cat" href="#work"><span class="thumb"><img src="reels/02.jpg" alt="" loading="lazy" decoding="async"></span><span class="lab"><span data-i18n="reel.k2">뷰티</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="cat" href="#work"><span class="thumb"><img src="reels/03.jpg" alt="" loading="lazy" decoding="async"></span><span class="lab"><span data-i18n="reel.k3">패션</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="cat" href="#work"><span class="thumb"><img src="reels/partya_9x16.jpg" alt="" loading="lazy" decoding="async"></span><span class="lab"><span data-i18n="reel.k4">앱</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="padding-top:8px">
+  <div class="wrap">
+    <div class="feats">
+      <div class="feat on"><svg viewBox="0 0 24 24"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12l1-9z"/></svg><span data-i18n="feat.1">7일 완성</span></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span data-i18n="feat.2">AI 제작 워크플로우</span></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3l3 5h6l-9 13L3 8h6l3-5z"/></svg><span data-i18n="feat.3">방송 수준 퀄리티</span></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M20.6 13.4L12 22l-9-9V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="8" cy="8" r="1.2"/></svg><span data-i18n="feat.4">가격표 공개</span></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span data-i18n="feat.5">전담 PM</span></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M7 8a4 4 0 100 8c3 0 4-8 7-8a4 4 0 110 8c-3 0-4-8-7-8z"/></svg><span data-i18n="feat.6">멀티포맷 기본</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="work">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <span class="eyebrow" data-i18n="sec.workEye">포트폴리오</span>
+        <h2 data-i18n="sec.workH">우리가 만든 것만 겁니다</h2>
+        <p data-i18n="sec.workP">남의 광고는 걸지 않습니다. 맨 앞은 실제로 납품한 작업이고, 나머지는 제작 문법을 보여주려고 가상 브랜드로 직접 만든 것입니다.</p>
+      </div>
+      <a href="#contact" class="btn ghost" data-i18n="sec.workBtn">같은 걸로 만들기</a>
+    </div>
+    <div class="filters" id="filters">
+      <button class="fbtn on" data-f="all"><span data-i18n="cat.all">전체</span></button>
+      <button class="fbtn" data-f="fnb"><span data-i18n="reel.k1">F&amp;B</span></button>
+      <button class="fbtn" data-f="beauty"><span data-i18n="reel.k2">뷰티</span></button>
+      <button class="fbtn" data-f="tech"><span data-i18n="cat.tech">테크</span></button>
+      <button class="fbtn" data-f="fashion"><span data-i18n="reel.k3">패션</span></button>
+      <button class="fbtn" data-f="life"><span data-i18n="cat.life">라이프스타일</span></button>
+      <button class="fbtn" data-f="jewel"><span data-i18n="cat.jewel">주얼리</span></button>
+      <button class="fbtn" data-f="graphic"><span data-i18n="cat.graphic">그래픽</span></button>
+      <button class="fbtn" data-f="app"><span data-i18n="cat.app">앱</span></button>
+    </div>
+    <div class="works">
+      <article class="work wide" data-cat="app">
+        <div class="media" tabindex="0" role="button" aria-label="Partya">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <video muted loop playsinline preload="none" poster="reels/partya_9x16.jpg" data-src="reels/partya_16x9.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="work.c0">앱 · 모임 플랫폼</div>
+          <h4 data-i18n="work.t0">그렇게까지 가고 싶은 모임</h4>
+          <div class="price"><b>PARTYA</b><small data-i18n="work.s0">30초 · 16:9 + 9:16</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="app">
+        <div class="media" tabindex="0" role="button" aria-label="혼자 정하기엔">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img src="reels/f01.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f01.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.app">앱</div>
+          <h4>혼자 정하기엔</h4>
+          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f1s">30초 · 7일</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="app">
+        <div class="media" tabindex="0" role="button" aria-label="TON TV">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img src="reels/f02.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f02.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.app">앱</div>
+          <h4>TON TV</h4>
+          <div class="price"><b data-i18n="price.p3">900만원</b><small data-i18n="work.f2s">60초 · 12일</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="app">
+        <div class="media" tabindex="0" role="button" aria-label="메이비원 MAYBE ONE">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img src="reels/f03.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f03.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.app">앱</div>
+          <h4>메이비원 MAYBE ONE</h4>
+          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f3s">30초 · 7일</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="BÀNCHAN">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img src="reels/f04.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f04.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>BÀNCHAN</h4>
+          <div class="price"><b data-i18n="price.p3">900만원</b><small data-i18n="work.f4s">53초 · 12일</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="app">
+        <div class="media" tabindex="0" role="button" aria-label="패밀리월렛">
+          <span class="badge client" data-i18n="work.client">실제 납품작</span>
+          <img src="reels/f05.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f05.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.app">앱</div>
+          <h4>패밀리월렛</h4>
+          <div class="price"><b data-i18n="price.p2">450만원</b><small data-i18n="work.f5s">30초 · 7일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="한밤식탁">
+          <video muted loop playsinline preload="none" poster="reels/01.jpg" data-src="reels/01.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4 data-i18n="work.t1">자정에도, 제대로</h4>
+          <div class="price"><b data-i18n="work.p1">150만원</b><small data-i18n="work.s1">18초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="무결">
+          <video muted loop playsinline preload="none" poster="reels/02.jpg" data-src="reels/02.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4 data-i18n="work.t2">오늘은, 그냥</h4>
+          <div class="price"><b data-i18n="work.p2">450만원</b><small data-i18n="work.s2">30초 · 7일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fashion">
+        <div class="media" tabindex="0" role="button" aria-label="산목">
+          <span class="badge" data-i18n="work.new">신작</span>
+          <video muted loop playsinline preload="none" poster="reels/03.jpg" data-src="reels/03.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k3">패션</div>
+          <h4 data-i18n="work.t3">퇴근하고, 그대로</h4>
+          <div class="price"><b data-i18n="work.p3">450만원</b><small data-i18n="work.s3">30초 · 7일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="VORTA">
+          <img src="refs/r01.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r01.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.tech">테크</div>
+          <h4>VORTA</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fashion">
+        <div class="media" tabindex="0" role="button" aria-label="Weekend Bag">
+          <img src="refs/r02.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r02.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k3">패션</div>
+          <h4>Weekend Bag</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Night Heron Tonic">
+          <img src="refs/r03.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r03.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Night Heron Tonic</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="life">
+        <div class="media" tabindex="0" role="button" aria-label="Room Tone Candleworks">
+          <img src="refs/r04.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r04.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.life">라이프스타일</div>
+          <h4>Room Tone Candleworks</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="puff.">
+          <img src="refs/r05.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r05.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>puff.</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Stack">
+          <img src="refs/r06.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r06.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Stack</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Bramble Ledger Kitchen">
+          <img src="refs/r07.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r07.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Bramble Ledger Kitchen</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="LAZARTIGUE">
+          <img src="refs/r08.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r08.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>LAZARTIGUE</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="Botanical">
+          <img src="refs/r09.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r09.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>Botanical</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="Creator UGC">
+          <img src="refs/r10.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r10.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>Creator UGC</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="Headphones">
+          <img src="refs/r11.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r11.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.tech">테크</div>
+          <h4>Headphones</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="life">
+        <div class="media" tabindex="0" role="button" aria-label="Glassware">
+          <img src="refs/r12.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r12.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.life">라이프스타일</div>
+          <h4>Glassware</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="KAVO">
+          <img src="refs/r13.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r13.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.tech">테크</div>
+          <h4>KAVO</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Velvet Pine Creamery">
+          <img src="refs/r14.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r14.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Velvet Pine Creamery</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="Beauty Device">
+          <img src="refs/r15.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r15.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>Beauty Device</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fashion">
+        <div class="media" tabindex="0" role="button" aria-label="Slim Wallet">
+          <img src="refs/r16.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r16.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k3">패션</div>
+          <h4>Slim Wallet</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="graphic">
+        <div class="media" tabindex="0" role="button" aria-label="Miniature City">
+          <img src="refs/r17.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r17.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
+          <h4>Miniature City</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="jewel">
+        <div class="media" tabindex="0" role="button" aria-label="Locket">
+          <img src="refs/r18.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r18.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.jewel">주얼리</div>
+          <h4>Locket</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="Earbuds">
+          <img src="refs/r19.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r19.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.tech">테크</div>
+          <h4>Earbuds</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="Hair Care">
+          <img src="refs/r20.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r20.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>Hair Care</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Stone Orchard Pantry">
+          <img src="refs/r21.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r21.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Stone Orchard Pantry</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="jewel">
+        <div class="media" tabindex="0" role="button" aria-label="Watch Exploded">
+          <img src="refs/r22.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r22.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.jewel">주얼리</div>
+          <h4>Watch Exploded</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="fnb">
+        <div class="media" tabindex="0" role="button" aria-label="Ame Kaze">
+          <img src="refs/r23.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r23.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k1">F&amp;B</div>
+          <h4>Ame Kaze</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="beauty">
+        <div class="media" tabindex="0" role="button" aria-label="Retro Tube">
+          <img src="refs/r24.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r24.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="reel.k2">뷰티</div>
+          <h4>Retro Tube</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="graphic">
+        <div class="media" tabindex="0" role="button" aria-label="Paper Wave">
+          <img src="refs/r25.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r25.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
+          <h4>Paper Wave</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+      <article class="work" data-cat="graphic">
+        <div class="media" tabindex="0" role="button" aria-label="Halftone Can">
+          <img src="refs/r26.jpg" alt="" loading="lazy" decoding="async">
+          <video muted loop playsinline preload="none" data-src="refs/r26.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="cat.graphic">그래픽</div>
+          <h4>Halftone Can</h4>
+          <div class="price"><b data-i18n="price.p1">150만원</b><small data-i18n="short.spec">15초 · 3일</small></div>
+        </div>
+      </article>
+    </div>
+    <p class="disc" data-i18n="work.disc">파티야를 제외한 브랜드는 실존하지 않습니다. 제작 문법을 보여주기 위해 직접 만든 것이며, 등장하는 인물·제품·로고는 전부 저작권이 정리된 자체 생성물입니다.</p>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="shead"><div>
+      <span class="eyebrow" data-i18n="sec.howEye">하는 일</span>
+      <h2 data-i18n="work.h2">AI가 촬영을 대신하고, 사람이 광고를 만듭니다</h2>
+      <p data-i18n="work.lead">우리가 파는 것은 AI 영상이 아니라 광고입니다. 광고주의 문제는 “AI로 영상을 뽑는 것”이 아니라 “이 제품을 어떻게 팔 것인가”이고, 그 답은 여전히 사람이 냅니다.</p>
+    </div></div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h4 data-i18n="work.l1t">사람이 기획하고 연출합니다</h4><p data-i18n="work.l1d">브리프를 읽고 소구점을 잡고, 컨셉 3안을 만들고, 컷을 설계합니다. 광고 문법을 아는 사람이 자리에 앉아 있습니다.</p></div>
+      <div class="step ai"><div class="num">02</div><h4 data-i18n="work.l2t">AI가 촬영합니다</h4><p data-i18n="work.l2d">스태프 30명과 하루치 로케이션이 들어가던 자리를 생성 모델이 대신합니다. 원가에서 가장 큰 블록이 사라집니다.</p></div>
+      <div class="step"><div class="num">03</div><h4 data-i18n="work.l3t">사람이 후반과 검수를 합니다</h4><p data-i18n="work.l3d">리듬 편집, 사운드, 자막, 그리고 초상권·저작권 검수까지. 납품되는 것은 생성 결과물이 아니라 완성된 광고입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="process">
+  <div class="wrap">
+    <div class="shead"><div>
+      <span class="eyebrow" data-i18n="sec.procEye">프로세스</span>
+      <h2 data-i18n="proc.h2">7영업일, 세 번의 승인</h2>
+      <p data-i18n="proc.lead">납기를 지키는 것이 먼저입니다. 공정을 고정하고, 광고주가 개입할 지점을 세 곳으로 명확히 나눕니다.</p>
+    </div></div>
+    <div class="flow">
+      <div class="fstep"><div class="d">D+0</div><div class="t" data-i18n="proc.t0">인테이크</div><div class="x" data-i18n="proc.d0">브리프 시트와 자료 일괄 접수, 30분 킥오프.</div></div>
+      <div class="fstep gate"><div class="d">D+1</div><div class="t" data-i18n="proc.t1">기획안</div><div class="x" data-i18n="proc.d1">컨셉 3안 제시 후 1안 선택. 소구점과 톤 확정.</div><span class="gchip">GATE 1</span></div>
+      <div class="fstep gate"><div class="d">D+2</div><div class="t" data-i18n="proc.t2">대본 · 콘티</div><div class="x" data-i18n="proc.d2">전 컷 정지 이미지와 카피 제출. 화면을 미리 봅니다.</div><span class="gchip">GATE 2</span></div>
+      <div class="fstep"><div class="d">D+3–4</div><div class="t" data-i18n="proc.t3">영상 생성</div><div class="x" data-i18n="proc.d3">컷별 생성 → 선별 → 재생성. 레퍼런스를 잠근 상태로 진행.</div></div>
+      <div class="fstep"><div class="d">D+5</div><div class="t" data-i18n="proc.t4">편집 · 사운드</div><div class="x" data-i18n="proc.d4">리듬 편집, 음악, 내레이션, 자막, 로고 엔드카드.</div></div>
+      <div class="fstep gate"><div class="d">D+6</div><div class="t" data-i18n="proc.t5">1차 시사</div><div class="x" data-i18n="proc.d5">수정 2회 포함. 요청은 한 번에 모아 받습니다.</div><span class="gchip">GATE 3</span></div>
+      <div class="fstep"><div class="d">D+7</div><div class="t" data-i18n="proc.t6">최종 납품</div><div class="x" data-i18n="proc.d6">본편 · 컷다운 전 종 · 스틸 · 자막 파일 · 이용확인서.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pricing">
+  <div class="wrap">
+    <div class="shead"><div>
+      <span class="eyebrow" data-i18n="sec.priceEye">가격 안내</span>
+      <h2 data-i18n="price.h2">가격표를 공개합니다</h2>
+      <p data-i18n="price.lead">이 시장에서 견적은 관행적으로 비공개입니다. 문의해야 알 수 있는 구조 자체가 중소 광고주를 걸러냅니다. 우리는 먼저 보여주는 쪽을 택했습니다.</p>
+    </div></div>
+    <div class="plans">
+      <div class="plan">
+        <div class="pname" data-i18n="price.n1">숏폼 싱글</div>
+        <div class="pspec" data-i18n="price.s1">15초 · 9:16 · 1편</div>
+        <div class="pprice" data-i18n="price.p1">150만원</div>
+        <div class="pdesc" data-i18n="price.d1">납기 3영업일. 릴스·틱톡·쇼츠 단일 소재가 필요할 때.</div>
+      </div>
+      <div class="plan hot">
+        <span class="ptag" data-i18n="price.tag">가장 많이 선택</span>
+        <div class="pname" data-i18n="price.n2">CF 스탠다드</div>
+        <div class="pspec" data-i18n="price.s2">30초 본편 + 15초 컷다운 2종 · 16:9 / 9:16</div>
+        <div class="pprice" data-i18n="price.p2">450만원</div>
+        <div class="pdesc" data-i18n="price.d2">납기 7영업일. 기존 프로덕션 견적의 10분의 1로 같은 사양을 받습니다.</div>
+      </div>
+      <div class="plan">
+        <div class="pname" data-i18n="price.n3">CF 프리미엄</div>
+        <div class="pspec" data-i18n="price.s3">60초 본편 + 컷다운 4종 + 스틸 6컷</div>
+        <div class="pprice" data-i18n="price.p3">900만원</div>
+        <div class="pdesc" data-i18n="price.d3">납기 12영업일. 브랜드 캠페인 단위로 소재가 한꺼번에 필요할 때.</div>
+      </div>
+    </div>
+    <div class="pmore" data-i18n="price.more">앱 소개영상 350만원 · 기업 소개영상 800만~1,500만원 · 콘텐츠 구독 월 280만원(주 1편 납품)</div>
+    <div class="pnote" data-i18n="price.note">전 금액 VAT 별도 · 수정 2회 포함 · 멀티포맷 컷다운 추가 비용 없음 · 긴급 납기 +40%</div>
+  </div>
+</section>
+
+<section class="band" id="vision">
+  <div class="wrap">
+    <div class="panel">
+      <div class="shead"><div>
+        <span class="eyebrow" data-i18n="sec.visionEye">비전</span>
+        <h2 data-i18n="vision.h2">좋은 광고를 만들 수 있는 회사의 수를 늘립니다</h2>
+      </div></div>
+      <div class="cols2">
+        <div>
+          <p data-i18n="vision.p1">광고 시장의 병목은 아이디어가 아니라 촬영이었습니다. 30초 광고 한 편의 견적에서 가장 큰 덩어리는 언제나 하루치 촬영에 몰려 있었고, 그 구조 때문에 제작비는 아래로 내려오지 못했습니다.</p>
+          <p data-i18n="vision.p2">그 사이 매체는 반대로 움직였습니다. 유튜브, 릴스, 틱톡, 옥외 디지털이 저마다 다른 비율과 길이를 요구합니다. 예전에는 한 편이면 됐던 자리에 이제 다섯 편이 필요합니다.</p>
+          <p data-i18n="vision.p3">그래서 좋은 제품이 광고 없이 남습니다. 제품이 나빠서가 아니라, 광고를 만들 수 없어서입니다. 아이작 스튜디오는 그 선을 지웁니다.</p>
+        </div>
+        <div class="pullbox" data-i18n="vision.pull">우리는 싸게 만드는 회사가 아닙니다. 같은 예산으로 훨씬 좋은 것을, 훨씬 빨리 만드는 회사입니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <h2 data-i18n="cta.h2">오늘 자료를 주시면, 3일 뒤에 시안을 봅니다</h2>
+      <p data-i18n="cta.p">제품 사진과 로고, 그리고 팔고 싶은 한 가지만 알려주십시오. 15초 시안 한 편을 무료로 만들어 보내드립니다. 마음에 들지 않으면 거기서 끝내면 됩니다.</p>
+      <div class="ctarow">
+        <a href="mailto:hello@isaacstudio.kr" class="btn" data-i18n="cta.btn">무료 시안 신청하기</a>
+        <a href="mailto:hello@isaacstudio.kr" class="mailto">hello@isaacstudio.kr</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footin">
+    <span>ISAAC STUDIO — AI COMMERCIAL FILM</span>
+    <span>SEOUL · 2026</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var DISPLAY = {
+    ja:'"Noto Sans JP","Gothic A1",sans-serif',
+    zh:'"Noto Sans SC","Gothic A1",sans-serif',
+    _ :'"Gothic A1","Noto Sans JP","Noto Sans SC",sans-serif'
+  };
+  var T = {
+    en:{
+      'cta.btn':'Request a free cut',
+      'cta.h2':'Send the material today. See the cut in three days.',
+      'cta.p':'Send us product photos, your logo, and the one thing you want to sell. We will build a 15-second cut and send it back, free. If you do not like it, that is where it ends.',
+      'feat.1':'Done in 7 days',
+      'feat.2':'AI production workflow',
+      'feat.3':'Broadcast-grade quality',
+      'feat.4':'Prices published',
+      'feat.5':'Dedicated producer',
+      'feat.6':'Multi-format included',
+      'hero.cta1':'Get a quote now',
+      'hero.cta2':'See the work',
+      'hero.h1a':'One commercial.',
+      'hero.h1b':'Seven days.',
+      'hero.sub':'People handle the strategy and the direction. AI handles the shoot. By replacing the single largest cost block in production, we deliver broadcast-grade commercials at one tenth the cost.',
+      'nav.cta':'Get a quote',
+      'nav.pricing':'Pricing',
+      'nav.process':'Process',
+      'nav.vision':'Vision',
+      'nav.work':'What We Do',
+      'nav.work2':'Portfolio',
+      'price.d1':'3 working days. For a single Reels, TikTok or Shorts asset.',
+      'price.d2':'7 working days. The same spec a traditional production house quotes at ten times the price.',
+      'price.d3':'12 working days. For when a whole campaign of assets is needed at once.',
+      'price.h2':'We publish our prices',
+      'price.lead':'In this market quotes are kept private by convention. That structure alone filters out smaller advertisers — you have to ask to find out. We chose to show it first.',
+      'price.more':'App intro film ₩3.5M · Corporate film ₩8M–15M · Content subscription ₩2.8M/month (one film per week)',
+      'price.n1':'Shortform Single',
+      'price.n2':'CF Standard',
+      'price.n3':'CF Premium',
+      'price.note':'All prices exclude VAT · Two revision rounds included · Multi-format cutdowns at no extra cost · Rush delivery +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15 sec · 9:16 · 1 film',
+      'price.s2':'30 sec master + two 15 sec cutdowns · 16:9 / 9:16',
+      'price.s3':'60 sec master + 4 cutdowns + 6 stills',
+      'price.tag':'MOST CHOSEN',
+      'proc.d0':'Brief sheet and all material received. 30-minute kickoff.',
+      'proc.d1':'Three concepts presented, one selected. Selling point and tone locked.',
+      'proc.d2':'Every cut as a still image, with copy. You see the screen in advance.',
+      'proc.d3':'Generate, select, regenerate — cut by cut, with references locked.',
+      'proc.d4':'Rhythm edit, music, narration, subtitles, logo end card.',
+      'proc.d5':'Two revision rounds included. Requests are collected in one pass.',
+      'proc.d6':'Master, every cutdown, stills, subtitle files and a usage certificate.',
+      'proc.h2':'Seven working days, three approvals',
+      'proc.lead':'Hitting the deadline comes first. We fix the process and define exactly three points where the client steps in.',
+      'proc.t0':'Intake',
+      'proc.t1':'Concept',
+      'proc.t2':'Script · Board',
+      'proc.t3':'Generation',
+      'proc.t4':'Edit · Sound',
+      'proc.t5':'First review',
+      'proc.t6':'Final delivery',
+      'proof.a':'Client work · Partya app commercial',
+      'proof.b':'16:9 master + 9:16 cutdown · concept through post, in full',
+      'reel.k1':'F&B',
+      'reel.k2':'Beauty',
+      'reel.k3':'Fashion',
+      'reel.k4':'Tech & Apps',
+      'sec.howEye':'What we do',
+      'sec.priceEye':'Pricing',
+      'sec.procEye':'Process',
+      'sec.visionEye':'Vision',
+      'sec.workBtn':'Get one like this',
+      'sec.workEye':'Portfolio',
+      'sec.workH':'We only hang what we made',
+      'sec.workP':'We do not hang other people\'s commercials. The first is work we actually delivered; the rest we built ourselves on fictional brands to show how we work.',
+      'vision.h2':'We increase the number of companies that can afford good advertising',
+      'vision.p1':'The bottleneck in advertising was never ideas. It was the shoot. In any quote for a 30-second commercial, the largest single block was always one day of filming, and that structure kept production costs from ever coming down.',
+      'vision.p2':'Meanwhile the media moved the other way. YouTube, Reels, TikTok and digital out-of-home each demand a different ratio and a different length. Where one film used to be enough, five are now needed.',
+      'vision.p3':'So good products go unadvertised. Not because the product is weak, but because the commercial could not be made. Isaac Studio erases that line.',
+      'vision.pull':'We are not a company that makes things cheaply. We make far better work, far faster, on the same budget.',
+      'work.c0':'App · social meetup platform',
+      'work.client':'CLIENT WORK',
+      'work.disc':'Apart from Partya, none of these brands exist. They were made to demonstrate how we work, and every person, product and logo in them is our own generated asset, cleared for use.',
+      'cat.all':'All',
+      'cat.app':'App',
+      'work.f1s':'30 sec · 7 days',
+      'work.f2s':'60 sec · 12 days',
+      'work.f3s':'30 sec · 7 days',
+      'work.f4s':'53 sec · 12 days',
+      'work.f5s':'30 sec · 7 days',
+      'cat.tech':'Tech',
+      'cat.life':'Lifestyle',
+      'cat.jewel':'Jewellery',
+      'cat.graphic':'Graphic',
+      'short.spec':'15 sec · 3 days',
+      'nav.range':'Range',
+      'sec.rangeEye':'Range',
+      'sec.rangeH':'We make these too',
+      'sec.rangeP':'We do not limit ourselves by category or by grammar. Product demos, packaging, talking heads, macro, miniature, graphic — we pick whichever language the job needs.',
+      'range.note':'The gallery above is a style reference showing the breadth of what we can make. Isaac Studio\'s delivered work is in the portfolio section above.',
+      'work.h2':'AI does the shooting. People make the advertising.',
+      'work.l1d':'We read the brief, find the selling point, build three concepts and design every cut. Someone who knows the grammar of advertising is in the chair.',
+      'work.l1t':'People plan and direct',
+      'work.l2d':'Generative models take the place of thirty crew members and a day of location. The largest block in the cost structure disappears.',
+      'work.l2t':'AI shoots',
+      'work.l3d':'Rhythm editing, sound, subtitles, and likeness and copyright review. What ships is not a generated file. It is a finished commercial.',
+      'work.l3t':'People finish and clear it',
+      'work.lead':'What we sell is not AI footage. It is advertising. The client’s problem is never “how do I generate a video” — it is “how do I sell this product,” and that answer still comes from a person.',
+      'work.new':'NEW',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30 sec · 16:9 + 9:16',
+      'work.s1':'18 sec · 3 days',
+      'work.s2':'30 sec · 7 days',
+      'work.s3':'30 sec · 7 days',
+      'work.t0':'Worth going that far for',
+      'work.t1':'Proper, even at midnight',
+      'work.t2':'Today, just as I am',
+      'work.t3':'Straight from work'
+    },
+    vi:{
+      'cta.btn':'Yêu cầu bản dựng miễn phí',
+      'cta.h2':'Gửi tư liệu hôm nay, ba ngày sau xem bản dựng',
+      'cta.p':'Hãy gửi ảnh sản phẩm, logo, và một điều bạn muốn bán. Chúng tôi sẽ dựng một bản 15 giây và gửi lại miễn phí. Nếu không ưng, mọi thứ dừng ở đó.',
+      'feat.1':'Hoàn thành trong 7 ngày',
+      'feat.2':'Quy trình AI',
+      'feat.3':'Chất lượng phát sóng',
+      'feat.4':'Công khai bảng giá',
+      'feat.5':'PM riêng',
+      'feat.6':'Đa định dạng sẵn có',
+      'hero.cta1':'Nhận báo giá ngay',
+      'hero.cta2':'Xem dự án',
+      'hero.h1a':'Một phim quảng cáo.',
+      'hero.h1b':'Bảy ngày.',
+      'hero.sub':'Con người lo ý tưởng và đạo diễn. AI lo phần quay. Bằng cách thay thế khối chi phí lớn nhất trong sản xuất, chúng tôi làm ra phim quảng cáo đạt chuẩn phát sóng với một phần mười chi phí.',
+      'nav.cta':'Nhận báo giá',
+      'nav.pricing':'Bảng giá',
+      'nav.process':'Quy trình',
+      'nav.vision':'Tầm nhìn',
+      'nav.work':'Chúng tôi làm gì',
+      'nav.work2':'Dự án',
+      'price.d1':'3 ngày làm việc. Cho một tư liệu Reels, TikTok hoặc Shorts.',
+      'price.d2':'7 ngày làm việc. Cùng cấu hình mà nhà sản xuất truyền thống báo giá gấp mười lần.',
+      'price.d3':'12 ngày làm việc. Khi cần cả một chiến dịch tư liệu cùng lúc.',
+      'price.h2':'Chúng tôi công khai bảng giá',
+      'price.lead':'Trong ngành này, báo giá theo thông lệ là kín. Riêng cấu trúc đó đã loại bỏ các nhà quảng cáo nhỏ — phải hỏi mới biết. Chúng tôi chọn cách nói trước.',
+      'price.more':'Phim giới thiệu ứng dụng ₩3.5M · Phim doanh nghiệp ₩8M–15M · Gói thuê bao nội dung ₩2.8M/tháng (một phim mỗi tuần)',
+      'price.n1':'Shortform đơn lẻ',
+      'price.n2':'CF Standard',
+      'price.n3':'CF Premium',
+      'price.note':'Giá chưa gồm VAT · Bao gồm hai vòng chỉnh sửa · Bản cắt đa định dạng không tính thêm phí · Giao gấp +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15 giây · 9:16 · 1 phim',
+      'price.s2':'Bản chính 30 giây + hai bản cắt 15 giây · 16:9 / 9:16',
+      'price.s3':'Bản chính 60 giây + 4 bản cắt + 6 ảnh tĩnh',
+      'price.tag':'ĐƯỢC CHỌN NHIỀU NHẤT',
+      'proc.d0':'Nhận biểu mẫu brief và toàn bộ tư liệu. Họp khởi động 30 phút.',
+      'proc.d1':'Trình ba concept, chọn một. Chốt điểm bán và tông điệu.',
+      'proc.d2':'Toàn bộ cảnh dưới dạng ảnh tĩnh kèm lời thoại. Bạn thấy trước màn hình.',
+      'proc.d3':'Tạo, chọn lọc, tạo lại theo từng cảnh, với tham chiếu đã khóa.',
+      'proc.d4':'Dựng nhịp, nhạc, lời dẫn, phụ đề, end card logo.',
+      'proc.d5':'Bao gồm hai vòng chỉnh sửa. Yêu cầu được gom một lần.',
+      'proc.d6':'Bản chính, mọi bản cắt, ảnh tĩnh, file phụ đề và giấy xác nhận sử dụng.',
+      'proc.h2':'Bảy ngày làm việc, ba lần phê duyệt',
+      'proc.lead':'Giữ đúng hạn là điều đầu tiên. Chúng tôi cố định quy trình và xác định đúng ba điểm khách hàng tham gia.',
+      'proc.t0':'Tiếp nhận',
+      'proc.t1':'Đề xuất concept',
+      'proc.t2':'Kịch bản · Storyboard',
+      'proc.t3':'Tạo hình ảnh động',
+      'proc.t4':'Dựng · Âm thanh',
+      'proc.t5':'Duyệt lần một',
+      'proc.t6':'Bàn giao',
+      'proof.a':'Dự án thực tế · quảng cáo ứng dụng Partya',
+      'proof.b':'Bản chính 16:9 + bản cắt 9:16 · trọn gói từ ý tưởng đến hậu kỳ',
+      'reel.k1':'F&B',
+      'reel.k2':'Làm đẹp',
+      'reel.k3':'Thời trang',
+      'reel.k4':'Công nghệ & Ứng dụng',
+      'sec.howEye':'Chúng tôi làm gì',
+      'sec.priceEye':'Bảng giá',
+      'sec.procEye':'Quy trình',
+      'sec.visionEye':'Tầm nhìn',
+      'sec.workBtn':'Làm một phim như vậy',
+      'sec.workEye':'Dự án',
+      'sec.workH':'Chỉ treo những gì chúng tôi tự làm',
+      'sec.workP':'Chúng tôi không treo quảng cáo của người khác. Phim đầu tiên là dự án đã bàn giao; những phim còn lại do chúng tôi tự làm trên thương hiệu hư cấu.',
+      'vision.h2':'Chúng tôi tăng số doanh nghiệp có thể làm quảng cáo tốt',
+      'vision.p1':'Nút thắt của ngành quảng cáo chưa bao giờ là ý tưởng, mà là buổi quay. Trong mọi báo giá phim 30 giây, phần lớn nhất luôn dồn vào một ngày quay, và chính cấu trúc đó khiến chi phí không bao giờ hạ xuống được.',
+      'vision.p2':'Trong khi đó, truyền thông lại đi ngược lại. YouTube, Reels, TikTok và màn hình ngoài trời mỗi nơi đòi một tỷ lệ và một độ dài khác nhau. Chỗ trước đây chỉ cần một phim thì nay cần tới năm.',
+      'vision.p3':'Vì vậy nhiều sản phẩm tốt không có quảng cáo. Không phải vì sản phẩm kém, mà vì không thể làm nổi một phim quảng cáo. Isaac Studio xóa bỏ ranh giới đó.',
+      'vision.pull':'Chúng tôi không phải công ty làm rẻ. Chúng tôi làm tốt hơn nhiều và nhanh hơn nhiều với cùng một ngân sách.',
+      'work.c0':'Ứng dụng · nền tảng kết nối',
+      'work.client':'DỰ ÁN THỰC TẾ',
+      'work.disc':'Ngoại trừ Partya, không thương hiệu nào ở đây có thật. Chúng được tạo ra để cho thấy cách chúng tôi làm việc, và mọi nhân vật, sản phẩm, logo trong đó đều là tài sản do chúng tôi tự tạo.',
+      'cat.all':'Tất cả',
+      'cat.app':'Ứng dụng',
+      'work.f1s':'30 giây · 7 ngày',
+      'work.f2s':'60 giây · 12 ngày',
+      'work.f3s':'30 giây · 7 ngày',
+      'work.f4s':'53 giây · 12 ngày',
+      'work.f5s':'30 giây · 7 ngày',
+      'cat.tech':'Công nghệ',
+      'cat.life':'Phong cách sống',
+      'cat.jewel':'Trang sức',
+      'cat.graphic':'Đồ họa',
+      'short.spec':'15 giây · 3 ngày',
+      'nav.range':'Phạm vi',
+      'sec.rangeEye':'Phạm vi',
+      'sec.rangeH':'Chúng tôi cũng làm những thứ này',
+      'sec.rangeP':'Chúng tôi không tự giới hạn theo ngành hay theo ngôn ngữ hình ảnh. Trình diễn sản phẩm, bao bì, người nói trực diện, macro, mô hình thu nhỏ, đồ họa — chúng tôi chọn thứ ngôn ngữ mà công việc cần.',
+      'range.note':'Bộ sưu tập phía trên là tham chiếu phong cách cho thấy phạm vi những gì chúng tôi có thể làm. Các dự án đã bàn giao của Isaac Studio nằm ở mục dự án phía trên.',
+      'work.h2':'AI quay phim, con người làm quảng cáo',
+      'work.l1d':'Chúng tôi đọc brief, tìm điểm bán hàng, dựng ba concept và thiết kế từng cảnh. Người ngồi ở ghế đó hiểu ngôn ngữ của quảng cáo.',
+      'work.l1t':'Con người lên ý tưởng và đạo diễn',
+      'work.l2d':'Mô hình tạo sinh thay cho ba mươi nhân sự và một ngày thuê bối cảnh. Khối chi phí lớn nhất biến mất.',
+      'work.l2t':'AI thực hiện phần quay',
+      'work.l3d':'Dựng nhịp, âm thanh, phụ đề, cùng với rà soát quyền hình ảnh và bản quyền. Thứ giao đi không phải một tệp tạo sinh, mà là một phim quảng cáo hoàn chỉnh.',
+      'work.l3t':'Con người hậu kỳ và kiểm duyệt',
+      'work.lead':'Thứ chúng tôi bán không phải video AI, mà là quảng cáo. Vấn đề của khách hàng chưa bao giờ là “làm sao tạo ra video” mà là “làm sao bán được sản phẩm này”, và câu trả lời đó vẫn đến từ con người.',
+      'work.new':'MỚI',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30 giây · 16:9 + 9:16',
+      'work.s1':'18 giây · 3 ngày',
+      'work.s2':'30 giây · 7 ngày',
+      'work.s3':'30 giây · 7 ngày',
+      'work.t0':'Đáng để đi xa đến vậy',
+      'work.t1':'Tử tế, ngay cả lúc nửa đêm',
+      'work.t2':'Hôm nay, cứ thế thôi',
+      'work.t3':'Tan làm, nguyên như thế'
+    },
+    ja:{
+      'cta.btn':'無料サンプルを依頼する',
+      'cta.h2':'今日素材をいただければ、3日後にサンプルを見られます',
+      'cta.p':'商品写真とロゴ、そして売りたいことを一つだけお知らせください。15秒のサンプルを1本、無料でつくってお送りします。気に入らなければ、そこで終わりで構いません。',
+      'feat.1':'7日で完成',
+      'feat.2':'AI制作ワークフロー',
+      'feat.3':'放送水準の品質',
+      'feat.4':'料金表を公開',
+      'feat.5':'専任プロデューサー',
+      'feat.6':'マルチフォーマット標準',
+      'hero.cta1':'今すぐ見積もり',
+      'hero.cta2':'実績を見る',
+      'hero.h1a':'CF 1本を、',
+      'hero.h1b':'7日で。',
+      'hero.sub':'企画と演出は人が、撮影はAIが担います。制作費の大部分を占めていた撮影工程を置き換えることで、放送水準のCFを従来の10分の1のコストで仕上げます。',
+      'nav.cta':'見積依頼',
+      'nav.pricing':'料金',
+      'nav.process':'制作フロー',
+      'nav.vision':'ビジョン',
+      'nav.work':'私たちの仕事',
+      'nav.work2':'実績',
+      'price.d1':'納期3営業日。リール・TikTok・ショート単発の素材に。',
+      'price.d2':'納期7営業日。既存プロダクションが10倍で見積る仕様と同じものを。',
+      'price.d3':'納期12営業日。キャンペーン単位で素材が一度に必要なときに。',
+      'price.h2':'料金表を公開します',
+      'price.lead':'この市場では見積は慣行的に非公開です。問い合わせないと分からない構造そのものが、中小の広告主をふるい落とします。私たちは先に見せる側を選びました。',
+      'price.more':'アプリ紹介映像 ₩3.5M · 企業紹介映像 ₩8M–15M · コンテンツ定額 月₩2.8M（週1本納品）',
+      'price.n1':'ショートフォーム単体',
+      'price.n2':'CF スタンダード',
+      'price.n3':'CF プレミアム',
+      'price.note':'全額VAT別 · 修正2回込み · マルチフォーマットのカットダウンは追加費用なし · 特急納期 +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15秒 · 9:16 · 1本',
+      'price.s2':'30秒本編 + 15秒カットダウン2種 · 16:9 / 9:16',
+      'price.s3':'60秒本編 + カットダウン4種 + スチル6カット',
+      'price.tag':'最も選ばれています',
+      'proc.d0':'ブリーフシートと素材を一括受領。30分のキックオフ。',
+      'proc.d1':'コンセプト3案を提示し1案を選定。訴求点とトーンを確定。',
+      'proc.d2':'全カットの静止画とコピーを提出。画面を先に見られます。',
+      'proc.d3':'カットごとに生成→選別→再生成。リファレンスを固定したまま進行。',
+      'proc.d4':'リズム編集、音楽、ナレーション、字幕、ロゴエンドカード。',
+      'proc.d5':'修正2回を含む。要望は一度にまとめて受けます。',
+      'proc.d6':'本編・全カットダウン・スチル・字幕ファイル・利用確認書。',
+      'proc.h2':'7営業日、3回の承認',
+      'proc.lead':'納期を守ることが先です。工程を固定し、クライアントが関わる地点を3か所に明確に分けます。',
+      'proc.t0':'インテーク',
+      'proc.t1':'企画案',
+      'proc.t2':'台本・絵コンテ',
+      'proc.t3':'映像生成',
+      'proc.t4':'編集・サウンド',
+      'proc.t5':'初号試写',
+      'proc.t6':'最終納品',
+      'proof.a':'実績案件・Partya アプリ広告',
+      'proof.b':'16:9本編 + 9:16カットダウン・企画から仕上げまで一貫',
+      'reel.k1':'F&B',
+      'reel.k2':'ビューティー',
+      'reel.k3':'ファッション',
+      'reel.k4':'テック・アプリ',
+      'sec.howEye':'私たちの仕事',
+      'sec.priceEye':'料金',
+      'sec.procEye':'制作フロー',
+      'sec.visionEye':'ビジョン',
+      'sec.workBtn':'同じものをつくる',
+      'sec.workEye':'実績',
+      'sec.workH':'自社でつくったものだけを掛けます',
+      'sec.workP':'他社の広告は掛けません。一番前は実際に納品した仕事で、残りは制作文法を示すために架空のブランドで自らつくったものです。',
+      'vision.h2':'良い広告をつくれる会社の数を増やす',
+      'vision.p1':'広告の課題はアイデアではなく、常に撮影でした。30秒のCF見積で最大の塊はいつも一日分の撮影に集中しており、その構造ゆえに制作費は下がりようがありませんでした。',
+      'vision.p2':'その間、メディアは逆方向に動きました。YouTube、リール、TikTok、デジタル屋外広告がそれぞれ異なる比率と尺を求めます。かつて1本で足りた場所に、いまは5本が必要です。',
+      'vision.p3':'結果として、良い製品が広告のないまま残ります。製品が悪いからではなく、広告をつくれないからです。アイザック・スタジオはその線を消します。',
+      'vision.pull':'私たちは安くつくる会社ではありません。同じ予算で、はるかに良いものを、はるかに速くつくる会社です。',
+      'work.c0':'アプリ・集まりプラットフォーム',
+      'work.client':'実績案件',
+      'work.disc':'Partyaを除くブランドは実在しません。制作文法を示すためにつくったもので、登場する人物・製品・ロゴはすべて権利を整理した自社生成物です。',
+      'cat.all':'すべて',
+      'cat.app':'アプリ',
+      'work.f1s':'30秒・7日',
+      'work.f2s':'60秒・12日',
+      'work.f3s':'30秒・7日',
+      'work.f4s':'53秒・12日',
+      'work.f5s':'30秒・7日',
+      'cat.tech':'テック',
+      'cat.life':'ライフスタイル',
+      'cat.jewel':'ジュエリー',
+      'cat.graphic':'グラフィック',
+      'short.spec':'15秒・3日',
+      'nav.range':'制作範囲',
+      'sec.rangeEye':'制作範囲',
+      'sec.rangeH':'こういうものもつくります',
+      'sec.rangeP':'業種にも文法にも制限を設けません。製品実演、パッケージ、トーキングヘッド、マクロ、ミニチュア、グラフィックまで — 必要な語法を選んで使います。',
+      'range.note':'上のギャラリーは制作語法の幅を示すスタイルリファレンスです。アイザック・スタジオの納品実績は上の実績セクションにあります。',
+      'work.h2':'AIが撮影を代わり、人が広告をつくる',
+      'work.l1d':'ブリーフを読み、訴求点を定め、コンセプトを3案つくり、カットを設計します。広告の文法を知る人間が席に座っています。',
+      'work.l1t':'人が企画し、演出します',
+      'work.l2d':'スタッフ30名と一日分のロケーションが入っていた場所を生成モデルが代わります。原価で最大の塊が消えます。',
+      'work.l2t':'AIが撮影します',
+      'work.l3d':'リズム編集、音、字幕、そして肖像権・著作権の確認まで。納品されるのは生成物ではなく、完成した広告です。',
+      'work.l3t':'人が仕上げと検証をします',
+      'work.lead':'私たちが売るのはAI映像ではなく、広告です。クライアントの課題は「AIで映像を出すこと」ではなく「この商品をどう売るか」であり、その答えは今も人が出します。',
+      'work.new':'NEW',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30秒・16:9 + 9:16',
+      'work.s1':'18秒・3日',
+      'work.s2':'30秒・7日',
+      'work.s3':'30秒・7日',
+      'work.t0':'そこまでして行きたい集まり',
+      'work.t1':'深夜でも、ちゃんと',
+      'work.t2':'今日は、そのまま',
+      'work.t3':'仕事帰り、そのまま'
+    },
+    zh:{
+      'cta.btn':'申请免费样片',
+      'cta.h2':'今天把素材给我们，三天后看到样片',
+      'cta.p':'只需给我们产品照片、logo，以及你最想卖的那一点。我们会做一支十五秒的样片免费发给你。不满意，到此为止。',
+      'feat.1':'7天交付',
+      'feat.2':'AI 制作流程',
+      'feat.3':'播出级品质',
+      'feat.4':'公开价格',
+      'feat.5':'专属制片',
+      'feat.6':'多版式标配',
+      'hero.cta1':'立即获取报价',
+      'hero.cta2':'查看作品',
+      'hero.h1a':'一支广告片，',
+      'hero.h1b':'七天交付。',
+      'hero.sub':'策划与导演由人完成，拍摄交给 AI。通过替代制作成本中占比最大的拍摄环节，我们以十分之一的费用交付播出级广告片。',
+      'nav.cta':'获取报价',
+      'nav.pricing':'价格',
+      'nav.process':'制作流程',
+      'nav.vision':'愿景',
+      'nav.work':'我们做什么',
+      'nav.work2':'作品',
+      'price.d1':'三个工作日。适合单支 Reels、抖音或 Shorts 素材。',
+      'price.d2':'七个工作日。传统制作公司报价十倍的同等规格。',
+      'price.d3':'十二个工作日。适合一次性需要整套战役素材时。',
+      'price.h2':'我们公开价格',
+      'price.lead':'这个行业里，报价按惯例都不公开。仅这一点就把中小广告主挡在门外——不问就不知道。我们选择先说出来。',
+      'price.more':'应用介绍片 ₩3.5M · 企业宣传片 ₩8M–15M · 内容订阅 每月₩2.8M（每周交付一支）',
+      'price.n1':'短视频单支',
+      'price.n2':'CF 标准版',
+      'price.n3':'CF 高级版',
+      'price.note':'所有价格不含增值税 · 含两轮修改 · 多版式剪辑不另收费 · 加急交付 +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15秒 · 9:16 · 1支',
+      'price.s2':'30秒主片 + 15秒剪辑版两支 · 16:9 / 9:16',
+      'price.s3':'60秒主片 + 四支剪辑版 + 六张静帧',
+      'price.tag':'选择最多',
+      'proc.d0':'收齐brief表单与全部素材，三十分钟启动会。',
+      'proc.d1':'提出三个概念并选定其一，确认卖点与调性。',
+      'proc.d2':'提交全部镜头静帧与文案，画面先看得到。',
+      'proc.d3':'逐镜生成、筛选、重生成，全程锁定参考。',
+      'proc.d4':'节奏剪辑、音乐、旁白、字幕、logo 尾板。',
+      'proc.d5':'含两轮修改，修改意见一次性汇总。',
+      'proc.d6':'主片、全部剪辑版本、静帧、字幕文件与使用确认书。',
+      'proc.h2':'七个工作日，三次确认',
+      'proc.lead':'守住交期是第一位的。我们固定流程，并明确划出客户参与的三个节点。',
+      'proc.t0':'素材接收',
+      'proc.t1':'创意方案',
+      'proc.t2':'脚本 · 分镜',
+      'proc.t3':'画面生成',
+      'proc.t4':'剪辑 · 声音',
+      'proc.t5':'首次审片',
+      'proc.t6':'最终交付',
+      'proof.a':'实际交付作品 · Partya 应用广告',
+      'proof.b':'16:9 主片 + 9:16 剪辑版 · 从策划到后期全流程',
+      'reel.k1':'餐饮',
+      'reel.k2':'美妆',
+      'reel.k3':'时尚',
+      'reel.k4':'科技与应用',
+      'sec.howEye':'我们做什么',
+      'sec.priceEye':'价格',
+      'sec.procEye':'制作流程',
+      'sec.visionEye':'愿景',
+      'sec.workBtn':'做一支同样的',
+      'sec.workEye':'作品',
+      'sec.workH':'只挂我们自己做的',
+      'sec.workP':'我们不挂别人的广告。最前面是真实交付的作品，其余是我们用虚构品牌自己做的，用来展示制作方式。',
+      'vision.h2':'让能够做出好广告的公司变得更多',
+      'vision.p1':'广告行业的瓶颈从来不是创意，而是拍摄。三十秒广告片的报价里，最大的一块永远集中在一天的拍摄上，正是这个结构让制作费始终降不下来。',
+      'vision.p2':'与此同时，媒体却朝相反方向发展。YouTube、Reels、抖音和户外数字屏各自要求不同的比例与时长。过去一支片子就够的位置，如今需要五支。',
+      'vision.p3':'于是好产品只能没有广告地留在原地。不是产品不好，而是根本做不出广告。Isaac Studio 要抹掉这条线。',
+      'vision.pull':'我们不是把东西做便宜的公司。我们是用同样的预算，做得好得多、也快得多的公司。',
+      'work.c0':'应用 · 聚会社交平台',
+      'work.client':'实际交付',
+      'work.disc':'除 Partya 外，这里的品牌都不存在。它们是为展示我们的制作方式而做，片中出现的人物、产品与标志全部是我们自己生成、权利清晰的素材。',
+      'cat.all':'全部',
+      'cat.app':'应用',
+      'work.f1s':'30秒 · 7天',
+      'work.f2s':'60秒 · 12天',
+      'work.f3s':'30秒 · 7天',
+      'work.f4s':'53秒 · 12天',
+      'work.f5s':'30秒 · 7天',
+      'cat.tech':'科技',
+      'cat.life':'生活方式',
+      'cat.jewel':'珠宝',
+      'cat.graphic':'图形',
+      'short.spec':'15秒 · 3天',
+      'nav.range':'制作范围',
+      'sec.rangeEye':'制作范围',
+      'sec.rangeH':'这些我们也做',
+      'sec.rangeP':'我们不给自己设行业或语法的限制。产品演示、包装、真人出镜、微距、微缩模型、图形——需要什么语言就用什么。',
+      'range.note':'上方图集是展示制作语言广度的风格参考。Isaac Studio 的交付作品在上面的作品区。',
+      'work.h2':'AI 负责拍摄，人负责做广告',
+      'work.l1d':'我们读brief、找出卖点、做三个概念、设计每一个镜头。坐在那个位置上的，是懂广告语法的人。',
+      'work.l1t':'人来策划与导演',
+      'work.l2d':'生成模型替代了三十人的团队和一整天的场地。成本结构中最大的一块就此消失。',
+      'work.l2t':'AI 负责拍摄',
+      'work.l3d':'节奏剪辑、声音、字幕，以及肖像权与版权审核。交付的不是生成文件，而是一支完成的广告片。',
+      'work.l3t':'人来做后期与审核',
+      'work.lead':'我们卖的不是 AI 视频，而是广告。客户的问题从来不是「怎么生成一段视频」，而是「这个产品要怎么卖」，而这个答案依然由人给出。',
+      'work.new':'新作',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30秒 · 16:9 + 9:16',
+      'work.s1':'18秒 · 3天',
+      'work.s2':'30秒 · 7天',
+      'work.s3':'30秒 · 7天',
+      'work.t0':'值得为它跑那么远的聚会',
+      'work.t1':'深夜也能好好吃一顿',
+      'work.t2':'今天，就这样',
+      'work.t3':'下班了，就这么去'
+    },
+    id:{
+      'cta.btn':'Minta sampel gratis',
+      'cta.h2':'Kirim materinya hari ini, lihat sampelnya tiga hari lagi',
+      'cta.p':'Kirimkan foto produk, logo Anda, dan satu hal yang ingin Anda jual. Kami buatkan potongan 15 detik dan kami kirim balik, gratis. Kalau tidak cocok, berhenti sampai di situ.',
+      'feat.1':'Selesai 7 hari',
+      'feat.2':'Alur kerja AI',
+      'feat.3':'Kualitas siar',
+      'feat.4':'Harga terbuka',
+      'feat.5':'PM khusus',
+      'feat.6':'Multi-format termasuk',
+      'hero.cta1':'Minta penawaran',
+      'hero.cta2':'Lihat portofolio',
+      'hero.h1a':'Satu iklan.',
+      'hero.h1b':'Tujuh hari.',
+      'hero.sub':'Konsep dan penyutradaraan dikerjakan manusia. Pengambilan gambar dikerjakan AI. Dengan menggantikan komponen biaya terbesar dalam produksi, kami menghasilkan iklan berkualitas siar dengan sepersepuluh biaya.',
+      'nav.cta':'Minta penawaran',
+      'nav.pricing':'Harga',
+      'nav.process':'Proses',
+      'nav.vision':'Visi',
+      'nav.work':'Yang Kami Kerjakan',
+      'nav.work2':'Portofolio',
+      'price.d1':'3 hari kerja. Untuk satu materi Reels, TikTok, atau Shorts.',
+      'price.d2':'7 hari kerja. Spesifikasi yang sama dengan yang ditawar rumah produksi konvensional sepuluh kali lipat.',
+      'price.d3':'12 hari kerja. Saat satu kampanye penuh dibutuhkan sekaligus.',
+      'price.h2':'Kami membuka daftar harga',
+      'price.lead':'Di pasar ini penawaran lazimnya dirahasiakan. Struktur itu saja sudah menyaring pengiklan kecil — harus bertanya dulu baru tahu. Kami memilih memberi tahu lebih dulu.',
+      'price.more':'Video profil aplikasi ₩3.5M · Video profil perusahaan ₩8M–15M · Langganan konten ₩2.8M/bulan (satu film per minggu)',
+      'price.n1':'Shortform Tunggal',
+      'price.n2':'CF Standard',
+      'price.n3':'CF Premium',
+      'price.note':'Semua harga belum termasuk PPN · Termasuk dua putaran revisi · Potongan multi-format tanpa biaya tambahan · Pengerjaan kilat +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15 detik · 9:16 · 1 film',
+      'price.s2':'Master 30 detik + dua potongan 15 detik · 16:9 / 9:16',
+      'price.s3':'Master 60 detik + 4 potongan + 6 still',
+      'price.tag':'PALING BANYAK DIPILIH',
+      'proc.d0':'Formulir brief dan seluruh materi diterima. Kickoff 30 menit.',
+      'proc.d1':'Tiga konsep diajukan, satu dipilih. Nilai jual dan tone dikunci.',
+      'proc.d2':'Seluruh shot sebagai gambar diam beserta copy. Layarnya terlihat lebih dulu.',
+      'proc.d3':'Dibuat, disaring, dibuat ulang per shot, dengan referensi terkunci.',
+      'proc.d4':'Editing ritme, musik, narasi, teks, dan end card logo.',
+      'proc.d5':'Termasuk dua putaran revisi. Permintaan dikumpulkan sekaligus.',
+      'proc.d6':'Master, semua versi potongan, still, berkas teks, dan surat keterangan penggunaan.',
+      'proc.h2':'Tujuh hari kerja, tiga persetujuan',
+      'proc.lead':'Menepati tenggat adalah yang utama. Kami mengunci prosesnya dan menetapkan tepat tiga titik keterlibatan klien.',
+      'proc.t0':'Penerimaan materi',
+      'proc.t1':'Konsep',
+      'proc.t2':'Naskah · Storyboard',
+      'proc.t3':'Produksi gambar',
+      'proc.t4':'Editing · Suara',
+      'proc.t5':'Tinjauan pertama',
+      'proc.t6':'Serah terima',
+      'proof.a':'Karya klien · iklan aplikasi Partya',
+      'proof.b':'Master 16:9 + potongan 9:16 · konsep hingga pascaproduksi, lengkap',
+      'reel.k1':'F&B',
+      'reel.k2':'Kecantikan',
+      'reel.k3':'Fesyen',
+      'reel.k4':'Teknologi & Aplikasi',
+      'sec.howEye':'Yang kami kerjakan',
+      'sec.priceEye':'Harga',
+      'sec.procEye':'Proses',
+      'sec.visionEye':'Visi',
+      'sec.workBtn':'Buat yang serupa',
+      'sec.workEye':'Portofolio',
+      'sec.workH':'Kami hanya memajang karya sendiri',
+      'sec.workP':'Kami tidak memajang iklan orang lain. Yang pertama benar-benar kami serahkan ke klien; sisanya kami buat sendiri dengan merek fiktif untuk menunjukkan cara kami bekerja.',
+      'vision.h2':'Kami memperbanyak perusahaan yang mampu membuat iklan bagus',
+      'vision.p1':'Hambatan di industri periklanan tidak pernah soal ide, melainkan soal syuting. Dalam setiap penawaran iklan 30 detik, porsi terbesar selalu menumpuk pada satu hari pengambilan gambar, dan struktur itulah yang membuat biaya produksi tak pernah turun.',
+      'vision.p2':'Sementara itu media bergerak ke arah sebaliknya. YouTube, Reels, TikTok, dan layar digital luar ruang masing-masing menuntut rasio dan durasi yang berbeda. Tempat yang dulu cukup satu film kini butuh lima.',
+      'vision.p3':'Akibatnya produk bagus dibiarkan tanpa iklan. Bukan karena produknya lemah, tetapi karena iklannya tidak mungkin dibuat. Isaac Studio menghapus garis itu.',
+      'vision.pull':'Kami bukan perusahaan yang membuat sesuatu jadi murah. Kami membuat hasil yang jauh lebih baik, jauh lebih cepat, dengan anggaran yang sama.',
+      'work.c0':'Aplikasi · platform pertemuan',
+      'work.client':'KARYA KLIEN',
+      'work.disc':'Selain Partya, tidak satu pun merek ini nyata. Semuanya dibuat untuk menunjukkan cara kami bekerja, dan setiap tokoh, produk, dan logo di dalamnya adalah aset hasil produksi kami sendiri.',
+      'cat.all':'Semua',
+      'cat.app':'Aplikasi',
+      'work.f1s':'30 detik · 7 hari',
+      'work.f2s':'60 detik · 12 hari',
+      'work.f3s':'30 detik · 7 hari',
+      'work.f4s':'53 detik · 12 hari',
+      'work.f5s':'30 detik · 7 hari',
+      'cat.tech':'Teknologi',
+      'cat.life':'Gaya hidup',
+      'cat.jewel':'Perhiasan',
+      'cat.graphic':'Grafis',
+      'short.spec':'15 detik · 3 hari',
+      'nav.range':'Cakupan',
+      'sec.rangeEye':'Cakupan',
+      'sec.rangeH':'Ini pun kami kerjakan',
+      'sec.rangeP':'Kami tidak membatasi diri pada satu industri atau satu tata bahasa. Demo produk, kemasan, talking head, makro, miniatur, grafis — kami memilih bahasa yang dibutuhkan pekerjaan.',
+      'range.note':'Galeri di atas adalah referensi gaya yang menunjukkan luasnya cakupan yang bisa kami buat. Karya yang benar-benar diserahkan Isaac Studio ada di bagian portofolio di atas.',
+      'work.h2':'AI yang mengambil gambar, manusia yang membuat iklan',
+      'work.l1d':'Kami membaca brief, menemukan nilai jual, menyusun tiga konsep, dan merancang setiap shot. Yang duduk di kursi itu adalah orang yang paham tata bahasa periklanan.',
+      'work.l1t':'Manusia merancang dan menyutradarai',
+      'work.l2d':'Model generatif menggantikan tiga puluh kru dan sehari sewa lokasi. Komponen terbesar dalam struktur biaya lenyap.',
+      'work.l2t':'AI mengambil gambar',
+      'work.l3d':'Editing ritme, suara, teks, serta pemeriksaan hak citra dan hak cipta. Yang dikirim bukan berkas hasil generasi, melainkan iklan yang sudah jadi.',
+      'work.l3t':'Manusia menyelesaikan dan memeriksa',
+      'work.lead':'Yang kami jual bukan video AI, melainkan iklan. Masalah klien tidak pernah “bagaimana membuat video”, melainkan “bagaimana menjual produk ini”, dan jawabannya tetap datang dari manusia.',
+      'work.new':'BARU',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30 detik · 16:9 + 9:16',
+      'work.s1':'18 detik · 3 hari',
+      'work.s2':'30 detik · 7 hari',
+      'work.s3':'30 detik · 7 hari',
+      'work.t0':'Pertemuan yang layak ditempuh sejauh itu',
+      'work.t1':'Layak, bahkan tengah malam',
+      'work.t2':'Hari ini, apa adanya',
+      'work.t3':'Langsung dari kantor'
+    },
+    ms:{
+      'cta.btn':'Mohon sampel percuma',
+      'cta.h2':'Hantar bahannya hari ini, lihat sampelnya tiga hari lagi',
+      'cta.p':'Hantarkan gambar produk, logo anda, dan satu perkara yang anda mahu jual. Kami akan bina potongan 15 saat dan hantar semula, percuma. Kalau tidak berkenan, ia berhenti di situ.',
+      'feat.1':'Siap dalam 7 hari',
+      'feat.2':'Aliran kerja AI',
+      'feat.3':'Kualiti siaran',
+      'feat.4':'Harga didedahkan',
+      'feat.5':'PM khusus',
+      'feat.6':'Berbilang format disertakan',
+      'hero.cta1':'Minta sebut harga',
+      'hero.cta2':'Lihat portfolio',
+      'hero.h1a':'Satu iklan.',
+      'hero.h1b':'Tujuh hari.',
+      'hero.sub':'Konsep dan pengarahan dikendalikan manusia. Penggambaran dikendalikan AI. Dengan menggantikan komponen kos terbesar dalam penerbitan, kami menghasilkan iklan bertaraf siaran pada sepersepuluh kos.',
+      'nav.cta':'Minta sebut harga',
+      'nav.pricing':'Harga',
+      'nav.process':'Proses',
+      'nav.vision':'Visi',
+      'nav.work':'Apa Yang Kami Buat',
+      'nav.work2':'Portfolio',
+      'price.d1':'3 hari bekerja. Untuk satu bahan Reels, TikTok atau Shorts.',
+      'price.d2':'7 hari bekerja. Spesifikasi sama yang disebut harga sepuluh kali ganda oleh rumah penerbitan konvensional.',
+      'price.d3':'12 hari bekerja. Apabila satu kempen penuh diperlukan serentak.',
+      'price.h2':'Kami mendedahkan senarai harga',
+      'price.lead':'Dalam pasaran ini sebut harga lazimnya dirahsiakan. Struktur itu sendiri menapis keluar pengiklan kecil — perlu bertanya barulah tahu. Kami memilih untuk memberitahu dahulu.',
+      'price.more':'Video pengenalan aplikasi ₩3.5M · Video korporat ₩8M–15M · Langganan kandungan ₩2.8M/bulan (satu filem seminggu)',
+      'price.n1':'Shortform Tunggal',
+      'price.n2':'CF Standard',
+      'price.n3':'CF Premium',
+      'price.note':'Semua harga tidak termasuk SST · Termasuk dua pusingan pindaan · Potongan berbilang format tanpa kos tambahan · Penghantaran segera +40%',
+      'price.p1':'₩1.5M',
+      'price.p2':'₩4.5M',
+      'price.p3':'₩9M',
+      'price.s1':'15 saat · 9:16 · 1 filem',
+      'price.s2':'Master 30 saat + dua potongan 15 saat · 16:9 / 9:16',
+      'price.s3':'Master 60 saat + 4 potongan + 6 imej pegun',
+      'price.tag':'PALING BANYAK DIPILIH',
+      'proc.d0':'Borang brif dan semua bahan diterima. Sesi permulaan 30 minit.',
+      'proc.d1':'Tiga konsep dikemukakan, satu dipilih. Nilai jualan dan tona dikunci.',
+      'proc.d2':'Setiap syot sebagai imej pegun berserta teks. Skrinnya dilihat lebih awal.',
+      'proc.d3':'Dijana, disaring, dijana semula setiap syot, dengan rujukan terkunci.',
+      'proc.d4':'Suntingan rentak, muzik, naratif, sari kata dan kad akhir logo.',
+      'proc.d5':'Termasuk dua pusingan pindaan. Permintaan dikumpulkan sekali gus.',
+      'proc.d6':'Master, semua versi potongan, imej pegun, fail sari kata dan surat pengesahan penggunaan.',
+      'proc.h2':'Tujuh hari bekerja, tiga kelulusan',
+      'proc.lead':'Menepati tarikh penghantaran didahulukan. Kami mengunci prosesnya dan menetapkan tepat tiga titik penglibatan klien.',
+      'proc.t0':'Penerimaan bahan',
+      'proc.t1':'Konsep',
+      'proc.t2':'Skrip · Papan cerita',
+      'proc.t3':'Penjanaan visual',
+      'proc.t4':'Suntingan · Bunyi',
+      'proc.t5':'Tayangan pertama',
+      'proc.t6':'Penyerahan akhir',
+      'proof.a':'Karya klien · iklan aplikasi Partya',
+      'proof.b':'Master 16:9 + potongan 9:16 · konsep hingga pascaproduksi, lengkap',
+      'reel.k1':'F&B',
+      'reel.k2':'Kecantikan',
+      'reel.k3':'Fesyen',
+      'reel.k4':'Teknologi & Apl',
+      'sec.howEye':'Apa yang kami buat',
+      'sec.priceEye':'Harga',
+      'sec.procEye':'Proses',
+      'sec.visionEye':'Visi',
+      'sec.workBtn':'Buat yang serupa',
+      'sec.workEye':'Portfolio',
+      'sec.workH':'Kami hanya pamerkan karya sendiri',
+      'sec.workP':'Kami tidak memaparkan iklan orang lain. Yang pertama benar-benar diserahkan kepada klien; selebihnya kami buat sendiri dengan jenama rekaan untuk menunjukkan cara kami bekerja.',
+      'vision.h2':'Kami menambah bilangan syarikat yang mampu menghasilkan iklan yang baik',
+      'vision.p1':'Halangan dalam industri pengiklanan tidak pernah idea, tetapi penggambaran. Dalam mana-mana sebut harga iklan 30 saat, bahagian terbesar sentiasa tertumpu pada sehari penggambaran, dan struktur itulah yang menahan kos penerbitan daripada turun.',
+      'vision.p2':'Sementara itu media bergerak ke arah bertentangan. YouTube, Reels, TikTok dan skrin digital luar masing-masing menuntut nisbah dan durasi berbeza. Tempat yang dahulu cukup satu filem kini memerlukan lima.',
+      'vision.p3':'Akibatnya produk yang baik kekal tanpa iklan. Bukan kerana produknya lemah, tetapi kerana iklannya tidak mampu dibuat. Isaac Studio memadamkan garis itu.',
+      'vision.pull':'Kami bukan syarikat yang membuat sesuatu jadi murah. Kami menghasilkan kerja yang jauh lebih baik, jauh lebih pantas, dengan bajet yang sama.',
+      'work.c0':'Aplikasi · platform perjumpaan',
+      'work.client':'KARYA KLIEN',
+      'work.disc':'Selain Partya, tiada satu pun jenama ini wujud. Semuanya dibuat untuk menunjukkan cara kami bekerja, dan setiap watak, produk dan logo di dalamnya ialah aset hasil kami sendiri.',
+      'cat.all':'Semua',
+      'cat.app':'Aplikasi',
+      'work.f1s':'30 saat · 7 hari',
+      'work.f2s':'60 saat · 12 hari',
+      'work.f3s':'30 saat · 7 hari',
+      'work.f4s':'53 saat · 12 hari',
+      'work.f5s':'30 saat · 7 hari',
+      'cat.tech':'Teknologi',
+      'cat.life':'Gaya hidup',
+      'cat.jewel':'Barang kemas',
+      'cat.graphic':'Grafik',
+      'short.spec':'15 saat · 3 hari',
+      'nav.range':'Skop',
+      'sec.rangeEye':'Skop',
+      'sec.rangeH':'Ini pun kami buat',
+      'sec.rangeP':'Kami tidak mengehadkan diri kepada satu industri atau satu tatabahasa. Demo produk, pembungkusan, talking head, makro, miniatur, grafik — kami pilih bahasa yang diperlukan kerja itu.',
+      'range.note':'Galeri di atas ialah rujukan gaya yang menunjukkan luasnya skop yang boleh kami hasilkan. Karya yang benar-benar diserahkan Isaac Studio ada di bahagian portfolio di atas.',
+      'work.h2':'AI yang menggambar, manusia yang membuat iklan',
+      'work.l1d':'Kami membaca brif, mencari nilai jualan, membina tiga konsep dan mereka bentuk setiap syot. Yang duduk di kerusi itu ialah orang yang memahami tatabahasa pengiklanan.',
+      'work.l1t':'Manusia merancang dan mengarah',
+      'work.l2d':'Model generatif menggantikan tiga puluh kru dan sehari sewaan lokasi. Komponen terbesar dalam struktur kos lenyap.',
+      'work.l2t':'AI melakukan penggambaran',
+      'work.l3d':'Suntingan rentak, bunyi, sari kata, serta semakan hak imej dan hak cipta. Yang dihantar bukan fail janaan, tetapi iklan yang telah siap.',
+      'work.l3t':'Manusia menyiapkan dan menyemak',
+      'work.lead':'Apa yang kami jual bukan video AI, tetapi iklan. Masalah klien tidak pernah “bagaimana menjana video”, sebaliknya “bagaimana menjual produk ini”, dan jawapannya tetap datang daripada manusia.',
+      'work.new':'BAHARU',
+      'work.p1':'₩1.5M',
+      'work.p2':'₩4.5M',
+      'work.p3':'₩4.5M',
+      'work.s0':'30 saat · 16:9 + 9:16',
+      'work.s1':'18 saat · 3 hari',
+      'work.s2':'30 saat · 7 hari',
+      'work.s3':'30 saat · 7 hari',
+      'work.t0':'Perjumpaan yang berbaloi ditempuh sejauh itu',
+      'work.t1':'Berbaloi, walaupun tengah malam',
+      'work.t2':'Hari ini, begitu sahaja',
+      'work.t3':'Terus dari kerja'
+    }
+  };
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+  var ko = {};
+  nodes.forEach(function(n){ ko[n.getAttribute('data-i18n')] = n.innerHTML; });
+  T.ko = ko;
+
+  var sel = document.getElementById('lang');
+  function apply(code){
+    var d = T[code] || T.ko;
+    nodes.forEach(function(n){
+      var v = d[n.getAttribute('data-i18n')];
+      if(v !== undefined) n.innerHTML = v;
+    });
+    document.documentElement.lang = code;
+    document.documentElement.style.setProperty('--display', DISPLAY[code] || DISPLAY._);
+    try{ localStorage.setItem('isaac.lang', code); }catch(e){}
+  }
+  var start = 'ko';
+  try{
+    var saved = localStorage.getItem('isaac.lang');
+    if(saved && T[saved]) start = saved;
+    else {
+      var n = (navigator.language || 'ko').toLowerCase();
+      var hit = ['ko','vi','ja','zh','id','ms','en'].filter(function(c){ return n.indexOf(c)===0; })[0];
+      if(hit) start = hit;
+    }
+  }catch(e){}
+  sel.value = start; apply(start);
+  sel.addEventListener('change', function(){ apply(sel.value); });
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // 모바일 메뉴
+  var bg = document.getElementById('burger'), mm = document.getElementById('mobmenu');
+  if(bg && mm){
+    bg.addEventListener('click', function(){
+      var open = !mm.hidden;
+      mm.hidden = open;
+      bg.setAttribute('aria-expanded', String(!open));
+    });
+    mm.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){ mm.hidden = true; bg.setAttribute('aria-expanded','false'); }
+    });
+  }
+
+  // 히어로 원 — 작품 순환 + 자동재생 폴백
+  var HERO = [
+    {s:'reels/f03.mp4', n:'메이비원', k:'30초 · CF'},
+    {s:'reels/f02.mp4', n:'TON TV',  k:'60초 · 브랜드 필름'},
+    {s:'reels/f04.mp4', n:'BÀNCHAN', k:'53초 · 티저'},
+    {s:'reels/03.mp4',  n:'산목',    k:'30초 · CF'},
+    {s:'reels/f05.mp4', n:'패밀리월렛', k:'30초 · CF'}
+  ];
+  var hv = document.getElementById('heroV'),
+      hw = document.getElementById('heroImg'),
+      hn = document.getElementById('nowName'),
+      hk = document.getElementById('nowSpec'), hi = 0;
+  function heroPlay(){ if(!hv) return; var p = hv.play(); if(p && p.catch) p.catch(function(){}); }
+  if(hv){
+    heroPlay();
+    ['pointerdown','keydown','scroll'].forEach(function(ev){
+      window.addEventListener(ev, heroPlay, {once:true, passive:true});
+    });
+    if(!reduce){
+      setInterval(function(){
+        if(document.hidden) return;
+        hi = (hi + 1) % HERO.length;
+        var it = HERO[hi];
+        hw.classList.add('swap');
+        setTimeout(function(){
+          hv.src = it.s; hv.load(); heroPlay();
+          hn.textContent = it.n; hk.textContent = it.k;
+          hw.classList.remove('swap');
+        }, 450);
+      }, 6500);
+    }
+  }
+
+  // 업종 필터
+  var works = Array.prototype.slice.call(document.querySelectorAll('.work'));
+  var fbtns = Array.prototype.slice.call(document.querySelectorAll('#filters .fbtn'));
+  fbtns.forEach(function(b){
+    var f = b.getAttribute('data-f');
+    var n = f === 'all' ? works.length : works.filter(function(w){ return w.getAttribute('data-cat') === f; }).length;
+    if(n === 0){ b.style.display = 'none'; return; }
+    var c = document.createElement('span'); c.className = 'n'; c.textContent = n; b.appendChild(c);
+    b.addEventListener('click', function(){
+      fbtns.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      works.forEach(function(w){
+        var show = (f === 'all') || (w.getAttribute('data-cat') === f);
+        w.classList.toggle('hide', !show);
+        if(!show){ var v = w.querySelector('video'); if(v){ v.pause(); } }
+      });
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.work .media'), function(m){
+    var v = m.querySelector('video'); if(!v) return;
+    function go(){
+      if(!v.src && v.dataset.src){ v.src = v.dataset.src; }
+      var p = v.play(); if(p && p.catch) p.catch(function(){});
+    }
+    function stop(){ v.pause(); try{ v.currentTime = 0; }catch(e){} }
+    if(!reduce && canHover){ m.addEventListener('pointerenter', go); m.addEventListener('pointerleave', stop); }
+    m.addEventListener('click', function(){ v.paused ? go() : stop(); });
+    m.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); v.paused ? go() : stop(); }
+    });
+  });
+})();
+</script>
