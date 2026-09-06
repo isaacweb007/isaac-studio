@@ -1,26 +1,22 @@
-# 작업 파일 (마스터·중간 산출물 수백 MB)
-AD/
-AD02/
-AD03/
-AD래퍼런스/
-시안/
+# ── 이 저장소는 isaacstudio.cc 로 배포된다. 추적되는 것만 웹에 올라간다.
+#    배포되는 것: index.html · CNAME · favicon 계열 · og.jpg · README.md
+#                 previews/ · reels/ · refs/
+#
+#    그 외 제작 자료는 전부 _작업파일/ 안에 있고 배포되지 않는다.
+#    ⚠ 저장소가 공개이므로, 원가·재무·미공개 소재는 반드시 _작업파일/ 안에 둔다.
 
-# 내부 문서 — 원가·재무 추정 포함, 공개 금지
-사업계획서.html
+_작업파일/
 
-# 원본 소스 영상 (배포본은 reels/ refs/ 에 압축본)
+# 원본 마스터는 용량이 커서 올리지 않는다 (배포용 압축본은 reels/ refs/ previews/)
 *.mov
-ad-01-stopped-thumb.mp4
-TonTV_60s_en_1080p.mp4
-파티야_숏츠_9x16.mp4
-45e0752b921a1c741b576a95a670cc90.jpg
-64b6d7f570bd679ef8b0b1f68ad3fcd3.jpg
+*.mp4
+!previews/*.mp4
+!reels/*.mp4
+!refs/*.mp4
 
-# 정본은 index.html
-랜딩페이지.html
+# 편집 중 사본·백업
 *.bak
+랜딩페이지.html
 
 .DS_Store
 .claude/
-패밀리월렛(부부)편.mp4
-final_v4.mp4
