@@ -270,6 +270,7 @@
   .badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;
     font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;z-index:2}
   .badge.client{background:#1A1A1A}
+    .badge.concept{background:rgba(16,18,24,.66);border:1px solid rgba(255,255,255,.42);font-weight:500;white-space:nowrap;backdrop-filter:blur(3px)}
   .play{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:999px;
     background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;
     transition:transform .18s;z-index:2}
@@ -624,6 +625,19 @@
           <div class="cat-tag" data-i18n="work.f15c">콘텐츠 거래소 · 씬딜</div>
           <h4 data-i18n="work.f15t">씬딜 — 같은 밤, 다른 창</h4>
           <div class="price"><b>$1,500</b><small data-i18n="work.f15s">60초 · 16:9</small></div>
+        </div>
+      </article>
+      <article class="work wide" data-cat="tech">
+        <div class="media" tabindex="0" role="button" aria-label="갤럭시 Z 폴드8 — 접힌 세계">
+          <span class="badge concept" data-i18n="work.concept">비공식 컨셉 필름</span>
+          <img data-thumb="reels/f16.jpg" alt="" decoding="async">
+          <video muted loop playsinline preload="none" data-src="reels/f16.mp4"></video>
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+          <div class="cat-tag" data-i18n="work.f16c">모바일 · 컨셉 필름</div>
+          <h4 data-i18n="work.f16t">갤럭시 Z 폴드8 — 접힌 세계</h4>
+          <div class="price"><b>GALAXY Z FOLD8</b><small data-i18n="work.f16s">30초 · 16:9 · 4K</small></div>
         </div>
       </article>
       <article class="work wide" data-cat="app">
@@ -1334,6 +1348,10 @@
       'work.f15c':'Content Marketplace · SceneDeal',
       'work.f15t':'SceneDeal — Same Night, Different Windows',
       'work.f15s':'60 sec · 16:9',
+      'work.concept':'CONCEPT FILM',
+      'work.f16c':'Mobile · Concept film',
+      'work.f16t':'Galaxy Z Fold8 — The Folded World',
+      'work.f16s':'30 sec · 16:9 · 4K',
       'work.f1t':'Too big to decide alone',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
@@ -1484,6 +1502,10 @@
       'work.f15c':'Sàn giao dịch nội dung · SceneDeal',
       'work.f15t':'SceneDeal — Cùng một đêm, những khung cửa khác',
       'work.f15s':'60 giây · 16:9',
+      'work.concept':'PHIM Ý TƯỞNG',
+      'work.f16c':'Di động · Phim ý tưởng',
+      'work.f16t':'Galaxy Z Fold8 — Thế giới gấp lại',
+      'work.f16s':'30 giây · 16:9 · 4K',
       'work.f1t':'Một mình khó quyết',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
@@ -1634,6 +1656,10 @@
       'work.f15c':'コンテンツ取引所・シーンディール',
       'work.f15t':'シーンディール — 同じ夜、違う窓',
       'work.f15s':'60秒・16:9',
+      'work.concept':'コンセプト映像',
+      'work.f16c':'モバイル・コンセプトフィルム',
+      'work.f16t':'Galaxy Z Fold8 — 折りたたまれた世界',
+      'work.f16s':'30秒・16:9・4K',
       'work.f1t':'ひとりで決めるには',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
@@ -1784,6 +1810,10 @@
       'work.f15c':'内容交易平台 · SceneDeal',
       'work.f15t':'SceneDeal — 同一个夜晚，不同的窗',
       'work.f15s':'60秒 · 16:9',
+      'work.concept':'概念短片',
+      'work.f16c':'移动设备 · 概念片',
+      'work.f16t':'Galaxy Z Fold8 — 折叠的世界',
+      'work.f16s':'30秒 · 16:9 · 4K',
       'work.f1t':'一个人决定，太难',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
@@ -1934,6 +1964,10 @@
       'work.f15c':'Bursa Konten · SceneDeal',
       'work.f15t':'SceneDeal — Malam yang Sama, Jendela Berbeda',
       'work.f15s':'60 detik · 16:9',
+      'work.concept':'FILM KONSEP',
+      'work.f16c':'Mobile · Film konsep',
+      'work.f16t':'Galaxy Z Fold8 — Dunia yang Terlipat',
+      'work.f16s':'30 detik · 16:9 · 4K',
       'work.f1t':'Terlalu berat diputuskan sendiri',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
@@ -2084,6 +2118,10 @@
       'work.f15c':'Bursa Kandungan · SceneDeal',
       'work.f15t':'SceneDeal — Malam yang Sama, Tingkap Berbeza',
       'work.f15s':'60 saat · 16:9',
+      'work.concept':'FILEM KONSEP',
+      'work.f16c':'Mudah Alih · Filem konsep',
+      'work.f16t':'Galaxy Z Fold8 — Dunia Terlipat',
+      'work.f16s':'30 saat · 16:9 · 4K',
       'work.f1t':'Terlalu berat diputuskan sendiri',
       'work.f3t':'MAYBE ONE',
       'work.f5t':'FamilyWallet',
